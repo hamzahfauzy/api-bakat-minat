@@ -46,7 +46,7 @@ else
     console.log("Db connected successfully")
 
 // Setup server port
-var port = process.env.PORT || 9000;
+var port = process.env.PORT || 8000;
 
 // Send message for default URL
 app.get('/', (req, res) => res.send('Hello World with Express'));
