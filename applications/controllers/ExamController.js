@@ -121,14 +121,19 @@ exports.new = async function (req, res) {
     {
         var val = school.students[i]
 
-        var metas = {
-            school:school,
-            exam_id:examSave._id
-        }
+        var sch = JSON.stringify(school)
+        sch = JSON.parse(sch)
+
+        delete sch.students
+
+        // var metas = {
+        //     school:sch,
+        //     exam_id:examSave._id
+        // }
         var user = await User.findOneAndUpdate({
             _id:val._id,
         },{
-            $set:{"metas.school":school,"metas.exam_id":exam._id},
+            $set:{"metas.school":sch,"metas.exam_id":exam._id},
             // metas: metas,
         })
         participants.push({
