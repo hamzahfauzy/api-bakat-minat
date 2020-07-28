@@ -105,28 +105,28 @@ exports.importPosts = async function (req, res) {
                 // },{new:true,upsert:true})
                 // console.log('category')
 
-                var subcategory = await Category.findOneAndUpdate({name:val[2]},{
-                    name:val[2],
-                    category:val[2],
+                var subcategory = await Category.findOneAndUpdate({name:val[1]},{
+                    name:val[1],
+                    // category:val[2],
                     // parent:category
                 },{new:true,upsert:true})
                 // console.log('subcategory')
 
                 const post = new Post({
-                    title:'Soal Exam '+i,
-                    description: val[0],
+                    title:'Soal Holland '+i,
+                    description: val[2],
                     category: subcategory,
                     type_as: 'question'
                 })
                 let postSave = await post.save()
                 // console.log('post')
 
-                for(idx=1;idx<=4;idx++){
+                for(idx=1;idx<=5;idx++){
                     const answer = new Post({
                         title:'Jawaban '+idx+' Soal '+i,
                         description: val[2+idx],
                         parent: postSave,
-                        type_as: idx == 1 ? 'correct answer' : 'answer'
+                        type_as: idx // == 1 ? 'correct answer' : 'answer'
                     })
                     let answerSave = await answer.save()
                     // console.log('answer')

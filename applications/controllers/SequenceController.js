@@ -36,7 +36,7 @@ exports.generate = async (req, res) => {
             content = JSON.parse(content)
             delete content.category
             var sub_contents = content.type_as == "question" ? await Post.find({'parent._id':new mongoose.Types.ObjectId(content._id)}).select('-type_as -parent') : {}
-            sub_contents = sub_contents.length ? sub_contents.sort(() => Math.random() - 0.5) : {};
+            // sub_contents = sub_contents.length ? sub_contents.sort(() => Math.random() - 0.5) : {};
             contents.push({
                 parent:content,
                 childs:sub_contents
