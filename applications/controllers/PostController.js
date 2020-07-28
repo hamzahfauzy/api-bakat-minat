@@ -94,45 +94,46 @@ exports.importPosts = async function (req, res) {
         mv(oldpath, newpath, async function (err) {
             var rows = await readXlsxFile(newpath)
             // rows.shift()
-            var categories = []
-            var subcategories = []
-            for(i=1;i<rows.length;i++)
-            {
-                var val = rows[i]
-                // var category = await Category.findOneAndUpdate({name:val[1]},{
-                //     name:val[1],
-                //     category:val[1],
-                // },{new:true,upsert:true})
-                // console.log('category')
+            // var categories = []
+            // var subcategories = []
+            // for(i=1;i<rows.length;i++)
+            // {
+            //     var val = rows[i]
+            //     // var category = await Category.findOneAndUpdate({name:val[1]},{
+            //     //     name:val[1],
+            //     //     category:val[1],
+            //     // },{new:true,upsert:true})
+            //     // console.log('category')
 
-                var subcategory = await Category.findOneAndUpdate({name:val[1]},{
-                    name:val[1],
-                    // category:val[2],
-                    // parent:category
-                },{new:true,upsert:true})
-                // console.log('subcategory')
+            //     var subcategory = await Category.findOneAndUpdate({name:val[1]},{
+            //         name:val[1],
+            //         // category:val[2],
+            //         // parent:category
+            //     },{new:true,upsert:true})
+            //     // console.log('subcategory')
 
-                const post = new Post({
-                    title:'Soal Holland '+i,
-                    description: val[2],
-                    category: subcategory,
-                    type_as: 'question'
-                })
-                let postSave = await post.save()
-                // console.log('post')
+            //     const post = new Post({
+            //         title:'Soal Holland '+i,
+            //         description: val[2],
+            //         category: subcategory,
+            //         type_as: 'question'
+            //     })
+            //     let postSave = await post.save()
+            //     // console.log('post')
 
-                for(idx=1;idx<=5;idx++){
-                    const answer = new Post({
-                        title:'Jawaban '+idx+' Soal '+i,
-                        description: val[2+idx],
-                        parent: postSave,
-                        type_as: idx // == 1 ? 'correct answer' : 'answer'
-                    })
-                    let answerSave = await answer.save()
-                    // console.log('answer')
-                }
-            }
+            //     for(idx=1;idx<=5;idx++){
+            //         const answer = new Post({
+            //             title:'Jawaban '+idx+' Soal '+i,
+            //             description: val[2+idx],
+            //             parent: postSave,
+            //             type_as: idx // == 1 ? 'correct answer' : 'answer'
+            //         })
+            //         let answerSave = await answer.save()
+            //         // console.log('answer')
+            //     }
+            // }
             res.json({
+                rows:rows,
                 message: 'Post Import success',
             })
         }) 
