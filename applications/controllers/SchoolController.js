@@ -75,12 +75,13 @@ exports.importStudents = function (req, res) {
                         return
                     }
                         var students = []
-                        for(var i=1;i<rows.length;i++)
+                        for(var i=0;i<rows.length;i++)
                         {
                             var val = rows[i]
+                            var username = val[1].replace(/'/g, "")
                             var user_exists = await User.findOne({
-                                name: val[2],
-                                username:val[1]
+                                name: val[0],
+                                username:username
                             })
                             var metas = {}
                             if(user_exists)
@@ -89,12 +90,19 @@ exports.importStudents = function (req, res) {
                                 metas = JSON.parse(metas)
                             }
                             metas.school = school
+                            metas.tempat_tanggal_lahir = val[2]
+                            metas.nilai_bahasa = val[3]
+                            metas.nilai_ips = val[4]
+                            metas.nilai_ipa = val[5]
+                            metas.jurusan   = val[6]
+                            metas.total_nilai = val[7]
+                            metas.predikat  = val[8]
                             var user = await User.findOneAndUpdate({
-                                name: val[2],
-                                username:val[1]
+                                name: val[0],
+                                username:username
                             },{
-                                name: val[2],
-                                username: val[1],
+                                name: val[0],
+                                username: username,
                                 password: 123,
                                 isAdmin: false,
                                 status: true,
@@ -102,8 +110,8 @@ exports.importStudents = function (req, res) {
                             },{new:true,upsert:true})
                             students.push({
                                 _id:user._id,
-                                nis:val[1],
-                                name:val[2],
+                                nis:username,
+                                name:val[0],
                             })
                         }
                     school.students = students
