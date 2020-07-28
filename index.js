@@ -36,7 +36,7 @@ app.use('/api', apiRoutes)
 let mongoose = require('mongoose');
 
 // Connect to Mongoose and set connection variable
-mongoose.connect('mongodb://localhost/minatbakat', { useNewUrlParser: true});
+mongoose.connect('mongodb://localhost/bakatminat', { useNewUrlParser: true});
 var db = mongoose.connection;
 
 // Added check for DB connection
@@ -53,7 +53,7 @@ app.get('/', (req, res) => res.send('Hello World with Express'));
 
 // Launch app to listen to specified port
 app.listen(port, '0.0.0.0', function () {
-     console.log("Running Minat Bakat API on port " + port);
+     console.log("Running Bakat Minat API on port " + port);
 });
 
 var d = new Date()
