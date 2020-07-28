@@ -120,6 +120,7 @@ exports.new = async function (req, res) {
     for(var i=0;i<school.students.length;i++)
     {
         var val = school.students[i]
+
         var metas = {
             school:school,
             exam_id:examSave._id
@@ -127,7 +128,8 @@ exports.new = async function (req, res) {
         var user = await User.findOneAndUpdate({
             _id:val._id,
         },{
-            metas: metas,
+            $set:{"metas.school":school,"metas.exam_id":exam._id},
+            // metas: metas,
         })
         participants.push({
             _id:user._id,
