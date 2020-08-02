@@ -835,7 +835,7 @@ exports.report = async (req,res) => {
             <th rowspan="2" style="text-align:center">NAMA</th>
             <th rowspan="2" style="text-align:center">NISN</th>
             <th rowspan="2" style="text-align:center">TEMPAT, TANGGAL LAHIR</th>
-            <th colspan="2" style="text-align:center">HASIL TES</th>
+            <th colspan="3" style="text-align:center">HASIL TES</th>
             <th rowspan="2" style="text-align:center">JURUSAN</th>
             <th rowspan="2" style="text-align:center">SKOR</th>
             <th rowspan="2" style="text-align:center">POTENSI AKADEMIK</th>
