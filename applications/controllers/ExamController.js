@@ -822,7 +822,7 @@ exports.report = async (req,res) => {
             <td style="border:0px"></td>
         </tr>
         <tr style="border:0px">
-            <td style="border:0px" colspan="2">TANGGAL PELAKSANAAN TPO</td>
+            <td style="border:0px" colspan="2">TANGGAL PELAKSANAAN TES</td>
             <td style="border:0px">:</td>
             <td style="border:0px">${exam.start_time.split('T')[0]}</td>
             <td style="border:0px"></td>
