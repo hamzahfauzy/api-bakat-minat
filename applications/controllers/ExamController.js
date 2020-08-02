@@ -769,7 +769,7 @@ exports.report = async (req,res) => {
         hasil_arr.push({"name":"ENTERPRISING","nilai":E})
         hasil_arr.push({"name":"CONFIDENTIAL","nilai":C})
 
-        hasil_arr = hasil_arr.sort((a,b) => (a.nilai > b.nilai) ? 1 : ((b.nilai > a.nilai) ? -1 : 0))
+        hasil_arr = hasil_arr.sort((a,b) => (a.nilai < b.nilai) ? 1 : ((b.nilai < a.nilai) ? -1 : 0))
         hasil_arr = hasil_arr.slice(0,3)
         var hasil = ""
         hasil_arr.forEach((val,idx) => {
