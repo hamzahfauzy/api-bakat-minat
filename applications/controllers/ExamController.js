@@ -695,11 +695,15 @@ exports.report = async (req,res) => {
         // delete user.sequences
         rows += "<td>"+user.name+"</td>"
         rows += "<td>\'"+user.username+"</td>"
-        rows += "<td>"+(user.metas.tempat_tanggal_lahir !== undefined ? user.metas.tempat_tanggal_lahir : '')+"</td>"
-        rows += "<td>"+(user.metas.jurusan !== undefined ? user.metas.jurusan : '')+"</td>"
+        rows += "<td>"+user.metas.tempat_tanggal_lahir+"</td>"
+        rows += "<td>"+user.metas.nilai_bahasa+"</td>"
+        rows += "<td>"+user.metas.nilai_ips+"</td>"
+        rows += "<td>"+user.metas.nilai_ipa+"</td>"
+        rows += "<td>"+user.metas.jurusan+"</td>"
+        rows += "<td>"+user.metas.total_nilai+"</td>"
+        rows += "<td>"+user.metas.predikat+"</td>"
         var sequences = user.metas.sequences
         if(typeof sequences === 'undefined'){
-            rows += "<td></td>"
             rows += "<td></td>"
             rows += "<td></td>"
             rows += "<td></td>"
@@ -709,7 +713,16 @@ exports.report = async (req,res) => {
             rows += "<td></td></tr>"
             continue
         } 
-        var subtest = 3, IPS = 0, IPA = 0, BAHASA1 = 0, BAHASA2 = 0, hasil1 = "", hasil2 = ""
+        // var subtest = 3, IPS = 0, IPA = 0, BAHASA1 = 0, BAHASA2 = 0, hasil1 = "", hasil2 = ""
+        var subtest = 1
+        var hasil_arr = []
+        var subtest_R = [2,14,26]
+        var subtest_I = [4,16,28]
+        var subtest_A = [6,18,30]
+        var subtest_S = [8,20,32]
+        var subtest_E = [10,22,34]
+        var subtest_C = [12,24,36]
+        var R = 0, I = 0, A = 0, S = 0, E = 0, C = 0
         for (var j = 0; j < sequences.length; j++) 
         {
             var quis = j+1
@@ -723,35 +736,53 @@ exports.report = async (req,res) => {
                 if(typeof content.selected === 'undefined') continue
                 var selected = content.selected
                 var post = await Post.findById(selected)
-                if(post && post.type_as == "correct answer") nilai++
+                if(post) nilai+= parseInt(post.type_as)
             }
             // user.nilai.push({
             //     title:sequences[j].title,
             //     nilai:nilai
             // })
             // user[""+sequences[j].title] = nilai
-            if(subtest <= 4) BAHASA1+=nilai
-            if(subtest == 5 || subtest == 6) BAHASA2+=nilai
-            if(subtest <= 6) IPS+=nilai
-            if(subtest >= 7) IPA+=nilai
+            // if(subtest <= 4) BAHASA1+=nilai
+            // if(subtest == 5 || subtest == 6) BAHASA2+=nilai
+            // if(subtest <= 6) IPS+=nilai
+            // if(subtest >= 7) IPA+=nilai
+            if(subtest_R.includes(subtest))
+                R += nilai
+            if(subtest_I.includes(subtest))
+                I += nilai
+            if(subtest_A.includes(subtest))
+                A += nilai
+            if(subtest_S.includes(subtest))
+                S += nilai
+            if(subtest_E.includes(subtest))
+                E += nilai
+            if(subtest_C.includes(subtest))
+                C += nilai
             subtest++
         }
-        hasil1 = IPS > IPA ? "IPS" : "IPA"
-        hasil1 = IPS == IPA ? "PENYESUAIAN" : hasil1
-        hasil2 = BAHASA1 < BAHASA2 ? "BAHASA" : BAHASA1 == BAHASA2 ? "PENYESUAIAN" : ""
-        var total = (IPA+IPS)
-        var potensi = total <= 39 ? "SANGAT RENDAH" : total >= 40 && total <= 59 ? "RENDAH" : total >= 60 && total <= 79 ? "SEDANG" : total >= 80 && total <= 99 ? "TINGGI" : "SANGAT TINGGI"
-        rows += "<td>"+BAHASA1+"</td>"
-        rows += "<td>"+BAHASA2+"</td>"
-        rows += "<td>"+(BAHASA1+BAHASA2)+"</td>"
-        rows += "<td>"+IPA+"</td>"
-        rows += "<td>"+total+"</td>"
-        rows += "<td>"+potensi+"</td>"
-        rows += "<td>"+hasil1+"</td>"
-        rows += "<td>"+hasil2+"</td></tr>"
+
+        hasil_arr.push({"name":"REALISTIC","nilai":R})
+        hasil_arr.push({"name":"INVESTIGATIVE","nilai":I})
+        hasil_arr.push({"name":"ARTISTIC","nilai":A})
+        hasil_arr.push({"name":"SOCIAL","nilai":S})
+        hasil_arr.push({"name":"ENTERPRISING","nilai":E})
+        hasil_arr.push({"name":"CONFIDENTIAL","nilai":C})
+
+        hasil_arr = hasil_arr.sort((a,b) => (a.nilai > b.nilai) ? 1 : ((b.nilai > a.nilai) ? -1 : 0))
+        hasil_arr = hasil_arr.slice(0,3)
+        var hasil = hasil_arr.join(" - ")
+
+        rows += "<td>"+R+"</td>"
+        rows += "<td>"+I+"</td>"
+        rows += "<td>"+A+"</td>"
+        rows += "<td>"+S+"</td>"
+        rows += "<td>"+E+"</td>"
+        rows += "<td>"+C+"</td>"
+        rows += "<td>"+hasil+"</td></tr>"
     }
 
-    var html_response = "<title>LAPORAN TES "+school.name+"</title>"
+    var html_response = "<title>LAPORAN MINAT BAKAT "+school.name+"</title>"
 
     html_response += "<br>"
     html_response += `<div>
@@ -763,7 +794,7 @@ exports.report = async (req,res) => {
             <td>${school.name}</td>
         </tr>
         <tr>
-            <td>TANGGAL PELAKSANAAN TPO</td>
+            <td>TANGGAL PELAKSANAAN TES</td>
             <td>:</td>
             <td>${exam.start_time}</td>
         </tr>
@@ -800,25 +831,27 @@ exports.report = async (req,res) => {
             <td style="border:0px"></td>
         </tr>
         <tr style="background-color:#eaeaea;">
-            <th rowspan="3" style="text-align:center">NO</th>
-            <th rowspan="3" style="text-align:center">NAMA</th>
-            <th rowspan="3" style="text-align:center">NISN</th>
-            <th rowspan="3" style="text-align:center">TEMPAT, TANGGAL LAHIR</th>
-            <th rowspan="3" style="text-align:center">MINAT</th>
-            <th colspan="5" style="text-align:center">HASIL TES</th>
-            <th rowspan="3" style="text-align:center">POTENSI AKADEMIK</th>
-            <th rowspan="3" style="text-align:center">JURUSAN 1</th>
-            <th rowspan="3" style="text-align:center">JURUSAN 2</th>
+            <th rowspan="2" style="text-align:center">NO</th>
+            <th rowspan="2" style="text-align:center">NAMA</th>
+            <th rowspan="2" style="text-align:center">NISN</th>
+            <th rowspan="2" style="text-align:center">TEMPAT, TANGGAL LAHIR</th>
+            <th colspan="2" style="text-align:center">HASIL TES</th>
+            <th rowspan="2" style="text-align:center">JURUSAN</th>
+            <th rowspan="2" style="text-align:center">SKOR</th>
+            <th rowspan="2" style="text-align:center">POTENSI AKADEMIK</th>
+            <th colspan="6" style="text-align:center">HASIL TES MINAT BAKAT</th>
+            <th rowspan="2" style="text-align:center">MINAT BAKAT</th>
         </tr>
         <tr style="background-color:#eaeaea;">
-            <th style="text-align:center" colspan="3">IPS</th>
-            <th style="text-align:center" rowspan="2">IPA</th>
-            <th style="text-align:center" rowspan="2">TOTAL</th>
-        </tr>
-        <tr style="background-color:#eaeaea;">
-            <th style="text-align:center">1 & 2</th>
-            <th style="text-align:center">3 & 4</th>
-            <th style="text-align:center">TOTAL</th>
+            <th style="text-align:center">BHS</th>
+            <th style="text-align:center">IPS</th>
+            <th style="text-align:center">IPA</th>
+            <th style="text-align:center">R</th>
+            <th style="text-align:center">I</th>
+            <th style="text-align:center">A</th>
+            <th style="text-align:center">S</th>
+            <th style="text-align:center">E</th>
+            <th style="text-align:center">C</th>
         </tr>
         ${rows}
     </table></div>
