@@ -12,7 +12,6 @@ var appDir = path.dirname(require.main.filename);
 var formidable = require('formidable')
 const readXlsxFile = require('read-excel-file/node')
 var xl = require('excel4node');
-const Pengumuman = require('../models/Pengumuman')
 
 exports.pengumuman = async function (req, res)
 {
