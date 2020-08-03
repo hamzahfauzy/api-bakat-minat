@@ -31,6 +31,7 @@ router.get('/uploads/:img', (req, res) => {
 });
 
 router.get('/tanggal-pengumuman',examController.pengumuman)
+router.get('/exams/download/:user_id',examController.download)
 router.get('/exams/report/:exam_id',examController.report)
 router.get('/exams/berita-acara/:exam_id',examController.printacara)
 

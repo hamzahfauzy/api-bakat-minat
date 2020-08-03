@@ -12,6 +12,7 @@ var formidable = require('formidable')
 const readXlsxFile = require('read-excel-file/node')
 var xl = require('excel4node');
 const Pengumuman = require('../models/Pengumuman')
+const User = require('../models/User')
 
 exports.pengumuman = async function (req, res)
 {
@@ -35,6 +36,15 @@ exports.pengumuman = async function (req, res)
             data:data
         })
     }
+}
+
+exports.download = async function(req, res)
+{
+    var user = await User.findById(req.params.user_id)
+    res.json({
+        message:'data user',
+        data: user
+    })
 }
 
 // Handle index actions
