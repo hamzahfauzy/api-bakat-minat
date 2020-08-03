@@ -15,7 +15,7 @@ var xl = require('excel4node');
 
 exports.pengumuman = async function (req, res)
 {
-    let pengumuman = await Pengumuman.find({})
+    let pengumuman = await Pengumuman.findById("5f280dbb6286670df7b10e0d")
     res.json({
         status: "success",
         message: "pengumuman retrieved successfully",
