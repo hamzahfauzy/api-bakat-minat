@@ -4,7 +4,6 @@ User = require('./../models/User')
 Post = require('./../models/Post')
 School = require('./../models/School')
 Sequence = require('./../models/Sequence')
-Pengumuman = require('./../models/Pengumuman')
 var mongoose = require('mongoose');
 var mv = require('mv');
 var path = require('path');
@@ -12,16 +11,30 @@ var appDir = path.dirname(require.main.filename);
 var formidable = require('formidable')
 const readXlsxFile = require('read-excel-file/node')
 var xl = require('excel4node');
+const Pengumuman = require('../models/Pengumuman')
 
 exports.pengumuman = async function (req, res)
 {
     let pengumuman = await Pengumuman.findOne({_id: new mongoose.Types.ObjectId("5f280dbb6286670df7b10e0d")})
-    res.json({
-        status: "success",
-        message: "pengumuman retrieved successfully",
-        data: await pengumuman
-    });
-    return
+    var data = await pengumuman
+    if(data == null)
+    {
+        var p = new Pengumuman
+        p.tanggal = "2020-08-13"
+        p.save(function(err){
+            res.json({
+                message:'berhasil',
+                data:p
+            })
+        })
+    }
+    else
+    {
+        res.json({
+            message:'data pengumuman',
+            data:data
+        })
+    }
 }
 
 // Handle index actions
