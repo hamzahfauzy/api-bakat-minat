@@ -3,6 +3,7 @@ Exam = require('./../models/Exam')
 User = require('./../models/User')
 Post = require('./../models/Post')
 School = require('./../models/School')
+Pengumuman = require('./../models/Pengumuman')
 Sequence = require('./../models/Sequence')
 var mongoose = require('mongoose');
 var mv = require('mv');
