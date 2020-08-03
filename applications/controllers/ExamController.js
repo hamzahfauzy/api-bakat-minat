@@ -215,6 +215,15 @@ exports.view = async function (req, res) {
             reports.push(user)
             continue
         } 
+
+        var hasil_arr = []
+        var subtest_R = [2,14,26]
+        var subtest_I = [4,16,28]
+        var subtest_A = [6,18,30]
+        var subtest_S = [8,20,32]
+        var subtest_E = [10,22,34]
+        var subtest_C = [12,24,36]
+        var R = 0, I = 0, A = 0, S = 0, E = 0, C = 0
         for (var j = 0; j < sequences.length; j++) 
         {
             var quis = j+1
@@ -228,14 +237,50 @@ exports.view = async function (req, res) {
                 if(typeof content.selected === 'undefined') continue
                 var selected = content.selected
                 var post = await Post.findById(selected)
-                if(post && post.type_as == "correct answer") nilai++
+                if(post) nilai+= parseInt(post.type_as)
             }
-            // user.nilai.push({
-            //     title:sequences[j].title,
-            //     nilai:nilai
-            // })
-            user[""+sequences[j].title] = nilai
+
+            if(subtest_R.includes(quis))
+                R += nilai
+            if(subtest_I.includes(quis))
+                I += nilai
+            if(subtest_A.includes(quis))
+                A += nilai
+            if(subtest_S.includes(quis))
+                S += nilai
+            if(subtest_E.includes(quis))
+                E += nilai
+            if(subtest_C.includes(quis))
+                C += nilai
         }
+        
+        // for (var j = 0; j < sequences.length; j++) 
+        // {
+        //     var quis = j+1
+        //     if(quis%2 != 0) continue;
+        //     var sequence = sequences[j].contents
+        //     var nilai = 0
+        //     for(var k = 0; k < sequence.length; k++)
+        //     {
+        //         var content = sequence[k]
+        //         // if(content.childs.length == 0) continue;
+        //         if(typeof content.selected === 'undefined') continue
+        //         var selected = content.selected
+        //         var post = await Post.findById(selected)
+        //         if(post && post.type_as == "correct answer") nilai++
+        //     }
+        //     // user.nilai.push({
+        //     //     title:sequences[j].title,
+        //     //     nilai:nilai
+        //     // })
+        //     user[""+sequences[j].title] = nilai
+        // }
+        user["R"] = R
+        user["I"] = I
+        user["A"] = A
+        user["S"] = S
+        user["E"] = E
+        user["C"] = C
         delete user.metas.sequences
         reports.push(user)
     }
@@ -714,7 +759,7 @@ exports.report = async (req,res) => {
             continue
         } 
         // var subtest = 3, IPS = 0, IPA = 0, BAHASA1 = 0, BAHASA2 = 0, hasil1 = "", hasil2 = ""
-        var subtest = 1
+        // var subtest = 1
         var hasil_arr = []
         var subtest_R = [2,14,26]
         var subtest_I = [4,16,28]
