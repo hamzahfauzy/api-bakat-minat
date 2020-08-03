@@ -15,7 +15,7 @@ var xl = require('excel4node');
 
 exports.pengumuman = async function (req, res)
 {
-    let pengumuman = await Pengumuman.find({_id:"5f280dbb6286670df7b10e0d"})
+    let pengumuman = await Pengumuman.findOne({_id: new mongoose.Types.ObjectId("5f280dbb6286670df7b10e0d")})
     res.json({
         status: "success",
         message: "pengumuman retrieved successfully",
