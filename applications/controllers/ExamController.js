@@ -15,7 +15,7 @@ const Pengumuman = require('../models/Pengumuman')
 
 exports.pengumuman = async function (req, res)
 {
-    let pengumuman = await Pengumuman.findOne({_id: new mongoose.Types.ObjectId("5f280dbb6286670df7b10e0d")})
+    let pengumuman = await Pengumuman.findOne({})
     var data = await pengumuman
     if(data == null)
     {
