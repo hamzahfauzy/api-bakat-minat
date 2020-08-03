@@ -747,19 +747,18 @@ exports.report = async (req,res) => {
             // if(subtest == 5 || subtest == 6) BAHASA2+=nilai
             // if(subtest <= 6) IPS+=nilai
             // if(subtest >= 7) IPA+=nilai
-            if(subtest_R.includes(subtest))
+            if(subtest_R.includes(quis))
                 R += nilai
-            if(subtest_I.includes(subtest))
+            if(subtest_I.includes(quis))
                 I += nilai
-            if(subtest_A.includes(subtest))
+            if(subtest_A.includes(quis))
                 A += nilai
-            if(subtest_S.includes(subtest))
+            if(subtest_S.includes(quis))
                 S += nilai
-            if(subtest_E.includes(subtest))
+            if(subtest_E.includes(quis))
                 E += nilai
-            if(subtest_C.includes(subtest))
+            if(subtest_C.includes(quis))
                 C += nilai
-            subtest++
         }
 
         hasil_arr.push({"name":"REALISTIC","nilai":R})
