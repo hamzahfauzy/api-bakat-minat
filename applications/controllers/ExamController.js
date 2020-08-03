@@ -4,6 +4,7 @@ User = require('./../models/User')
 Post = require('./../models/Post')
 School = require('./../models/School')
 Sequence = require('./../models/Sequence')
+Pengumuman = require('./../models/Pengumuman')
 var mongoose = require('mongoose');
 var mv = require('mv');
 var path = require('path');
@@ -11,6 +12,18 @@ var appDir = path.dirname(require.main.filename);
 var formidable = require('formidable')
 const readXlsxFile = require('read-excel-file/node')
 var xl = require('excel4node');
+const Pengumuman = require('../models/Pengumuman')
+
+exports.pengumuman = async function (req, res)
+{
+    let pengumuman = await Pengumuman.find({})
+    res.json({
+        status: "success",
+        message: "pengumuman retrieved successfully",
+        data: await pengumuman
+    });
+    return
+}
 
 // Handle index actions
 exports.index = async function (req, res) {

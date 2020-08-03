@@ -30,6 +30,7 @@ router.get('/uploads/:img', (req, res) => {
     res.sendFile(path.join(__dirname, "../uploads/"+req.params.img));
 });
 
+router.get('/tanggal-pengumuman',examController.pengumuman)
 router.get('/exams/report/:exam_id',examController.report)
 router.get('/exams/berita-acara/:exam_id',examController.printacara)
 
