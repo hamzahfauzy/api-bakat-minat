@@ -37,15 +37,6 @@ exports.pengumuman = async function (req, res)
     }
 }
 
-exports.download = async function(req, res)
-{
-    var user = await User.findById(req.params.user_id)
-    res.json({
-        message:'data user',
-        data: await user
-    })
-}
-
 // Handle index actions
 exports.index = async function (req, res) {
     try 
@@ -71,71 +62,6 @@ exports.index = async function (req, res) {
         });
     }
     return
-    // Exam.get(async function (err, exams) {
-    //     if (err) {
-    //         res.json({
-    //             status: "error",
-    //             message: err,
-    //         });
-    //         return
-    //     }
-
-    //     var _exams = JSON.stringify(exams)
-    //     _exams = JSON.parse(_exams)
-    //     delete exams.participants
-
-    //     for(var h=0;h<_exams.length;h++){
-    //         var users = _exams[h].participants
-    //         var reports = []
-    //         for(var i=0;i<users.length;i++)
-    //         {
-    //             var participant = users[i]
-    //             var user = await User.findById(users[i]._id)
-    //             if(!user) continue
-    //             user = JSON.stringify(user)
-    //             user = JSON.parse(user)
-    //             // delete user.metas.sequences
-    //             delete user.metas.school
-    //             // delete user.sequences
-    //             var sequences = user.metas.sequences
-    //             if(typeof sequences === 'undefined'){
-    //                 user.metas.NISN = participant.nis
-    //                 reports.push(user)
-    //                 continue
-    //             } 
-    //             for (var j = 0; j < sequences.length; j++) 
-    //             {
-    //                 var quis = j+1
-    //                 if(quis%2 != 0) continue;
-    //                 var sequence = sequences[j].contents
-    //                 var nilai = 0
-    //                 for(var k = 0; k < sequence.length; k++)
-    //                 {
-    //                     var content = sequence[k]
-    //                     // if(content.childs.length == 0) continue;
-    //                     if(typeof content.selected === 'undefined') continue
-    //                     var selected = content.selected
-    //                     var post = await Post.findById(selected)
-    //                     if(post && post.type_as == "correct answer") nilai++
-    //                 }
-    //                 // user.nilai.push({
-    //                 //     title:sequences[j].title,
-    //                 //     nilai:nilai
-    //                 // })
-    //                 user[""+sequences[j].title] = nilai
-    //             }
-    //             delete user.metas.sequences
-    //             reports.push(user)
-    //         }
-    //         _exams[h].participants = reports
-    //     }
-
-    //     res.json({
-    //         status: "success",
-    //         message: "Exam retrieved successfully",
-    //         data: _exams
-    //     });
-    // });
 };
 
 // Handle create user actions
@@ -288,27 +214,6 @@ exports.view = async function (req, res) {
                 C += nilai
         }
         
-        // for (var j = 0; j < sequences.length; j++) 
-        // {
-        //     var quis = j+1
-        //     if(quis%2 != 0) continue;
-        //     var sequence = sequences[j].contents
-        //     var nilai = 0
-        //     for(var k = 0; k < sequence.length; k++)
-        //     {
-        //         var content = sequence[k]
-        //         // if(content.childs.length == 0) continue;
-        //         if(typeof content.selected === 'undefined') continue
-        //         var selected = content.selected
-        //         var post = await Post.findById(selected)
-        //         if(post && post.type_as == "correct answer") nilai++
-        //     }
-        //     // user.nilai.push({
-        //     //     title:sequences[j].title,
-        //     //     nilai:nilai
-        //     // })
-        //     user[""+sequences[j].title] = nilai
-        // }
         user["R"] = R
         user["I"] = I
         user["A"] = A
@@ -323,14 +228,6 @@ exports.view = async function (req, res) {
         message: 'Exam detail loading..',
         data: _exam
     });
-    // Exam.findById(req.params.exam_id, function (err, exam) {
-    //     if (err)
-    //         res.send(err);
-    //     res.json({
-    //         message: 'Exam detail loading..',
-    //         data: exam
-    //     });
-    // });
 };
 
 exports.update = function (req, res) {
@@ -461,19 +358,6 @@ exports.updateOrder = (req,res) => {
             });
         });
     });
-    // Exam.find({'sequences._id':req.params.sequence_id, async function (err, exam) {
-    //     if (err)
-    //         res.send(err);
-    //     exam.sequence.order = req.body.order
-    //     exam.save(function (err) {
-    //         if (err)
-    //             res.json(err);
-    //         res.json({
-    //             message: 'Exam Info updated',
-    //             data: exam
-    //         });
-    //     });
-    // });
 }
 exports.updateCountdown = (req,res) => {
     Exam.findOne({'sequences._id':req.params.sequence_id.toString()}, (err, exam) => {
@@ -623,35 +507,6 @@ exports.report2 = async (req,res) => {
         ws.cell(row, 12).string(hasil2)
     }
      
-    // Create a reusable style
-    // var style = wb.createStyle({
-    //   font: {
-    //     color: '#FF0800',
-    //     size: 12,
-    //   },
-    //   numberFormat: '$#,##0.00; ($#,##0.00); -',
-    // });
-     
-    // // Set value of cell A1 to 100 as a number type styled with paramaters of style
-    // ws.cell(2, 1)
-    //   .number(100)
-     
-    // // Set value of cell B1 to 200 as a number type styled with paramaters of style
-    // ws.cell(2, 2)
-    //   .number(200)
-     
-    // // Set value of cell C1 to a formula styled with paramaters of style
-    // ws.cell(2, 3)
-    //   .formula('A1 + B1')
-     
-    // // Set value of cell A2 to 'string' styled with paramaters of style
-    // ws.cell(3, 1)
-    //   .string('string')
-     
-    // // Set value of cell A3 to true as a boolean type styled with paramaters of style but with an adjustment to the font size.
-    // ws.cell(4, 1)
-    //   .bool(true)
-     
     wb.write('uploads/'+school.name+'.xlsx');
 
     res.json({file:'uploads/'+school.name+'.xlsx'});
@@ -715,35 +570,6 @@ exports.beritaacara = async (req,res) => {
         ws.cell(row, 4).string(user.metas.end_time !== undefined ? user.metas.end_time : '')
         ws.cell(row, 5).string(user.metas.end_time !== undefined ? "Selesai" : "Sedang Mengerjakan")
     }
-     
-    // Create a reusable style
-    // var style = wb.createStyle({
-    //   font: {
-    //     color: '#FF0800',
-    //     size: 12,
-    //   },
-    //   numberFormat: '$#,##0.00; ($#,##0.00); -',
-    // });
-     
-    // // Set value of cell A1 to 100 as a number type styled with paramaters of style
-    // ws.cell(2, 1)
-    //   .number(100)
-     
-    // // Set value of cell B1 to 200 as a number type styled with paramaters of style
-    // ws.cell(2, 2)
-    //   .number(200)
-     
-    // // Set value of cell C1 to a formula styled with paramaters of style
-    // ws.cell(2, 3)
-    //   .formula('A1 + B1')
-     
-    // // Set value of cell A2 to 'string' styled with paramaters of style
-    // ws.cell(3, 1)
-    //   .string('string')
-     
-    // // Set value of cell A3 to true as a boolean type styled with paramaters of style but with an adjustment to the font size.
-    // ws.cell(4, 1)
-    //   .bool(true)
      
     wb.write('uploads/berita-acara-'+school.name+'.xlsx');
 
@@ -817,15 +643,7 @@ exports.report = async (req,res) => {
                 var post = await Post.findById(selected)
                 if(post) nilai+= parseInt(post.type_as)
             }
-            // user.nilai.push({
-            //     title:sequences[j].title,
-            //     nilai:nilai
-            // })
-            // user[""+sequences[j].title] = nilai
-            // if(subtest <= 4) BAHASA1+=nilai
-            // if(subtest == 5 || subtest == 6) BAHASA2+=nilai
-            // if(subtest <= 6) IPS+=nilai
-            // if(subtest >= 7) IPA+=nilai
+
             if(subtest_R.includes(quis))
                 R += nilai
             if(subtest_I.includes(quis))
@@ -946,6 +764,367 @@ exports.report = async (req,res) => {
 
     res.type("text/html");
     res.send(html_response);
+}
+
+exports.reportDetail = async (req,res) => {
+    // Create a new instance of a Workbook class
+    
+    var exam = await Exam.findById(req.params.exam_id)
+    var users = exam.participants
+    var school = await School.findById(exam.school_id)
+    users = JSON.stringify(users)
+    users = JSON.parse(users)
+    var rows = ""
+    for(var i=0;i<users.length;i++)
+    {
+        var n = i+1;
+        rows += "<tr><td>"+n+"</td>"
+        var row = i+2;
+        var participant = users[i]
+        var user = await User.findById(users[i]._id)
+        if(!user) continue
+        user = JSON.stringify(user)
+        user = JSON.parse(user)
+        // delete user.metas.sequences
+        delete user.metas.school
+        // delete user.sequences
+        rows += "<td>"+user.name+"</td>"
+        rows += "<td>\'"+user.username+"</td>"
+        var sequences = user.metas.sequences
+        if(typeof sequences === 'undefined'){
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "</tr>"
+            continue
+        } 
+        // var subtest = 3, IPS = 0, IPA = 0, BAHASA1 = 0, BAHASA2 = 0, hasil1 = "", hasil2 = ""
+        // var subtest = 1
+        var hasil_arr = []
+        var subtest_R = [2,14,26]
+        var subtest_I = [4,16,28]
+        var subtest_A = [6,18,30]
+        var subtest_S = [8,20,32]
+        var subtest_E = [10,22,34]
+        var subtest_C = [12,24,36]
+        var R = 0, I = 0, A = 0, S = 0, E = 0, C = 0
+        var _R = {'1':0,'2':0,'3':0,'4':0,'5':0}
+        var _I = {'1':0,'2':0,'3':0,'4':0,'5':0}
+        var _A = {'1':0,'2':0,'3':0,'4':0,'5':0}
+        var _S = {'1':0,'2':0,'3':0,'4':0,'5':0}
+        var _E = {'1':0,'2':0,'3':0,'4':0,'5':0}
+        var _C = {'1':0,'2':0,'3':0,'4':0,'5':0}
+        for (var j = 0; j < sequences.length; j++) 
+        {
+            var quis = j+1
+            if(quis%2 != 0) continue;
+            var sequence = sequences[j].contents
+            var nilai = 0
+            for(var k = 0; k < sequence.length; k++)
+            {
+                var content = sequence[k]
+                // if(content.childs.length == 0) continue;
+                if(typeof content.selected === 'undefined') continue
+                var selected = content.selected
+                var post = await Post.findById(selected)
+                if(post) nilai+= parseInt(post.type_as)
+                if(subtest_R.includes(quis))
+                    _R[parseInt(post.type_as)]++
+                if(subtest_I.includes(quis))
+                    _I[parseInt(post.type_as)]++
+                if(subtest_A.includes(quis))
+                    _A[parseInt(post.type_as)]++
+                if(subtest_S.includes(quis))
+                    _S[parseInt(post.type_as)]++
+                if(subtest_E.includes(quis))
+                    _E[parseInt(post.type_as)]++
+                if(subtest_C.includes(quis))
+                    _C[parseInt(post.type_as)]++
+            }
+
+            if(subtest_R.includes(quis))
+                R += nilai
+            if(subtest_I.includes(quis))
+                I += nilai
+            if(subtest_A.includes(quis))
+                A += nilai
+            if(subtest_S.includes(quis))
+                S += nilai
+            if(subtest_E.includes(quis))
+                E += nilai
+            if(subtest_C.includes(quis))
+                C += nilai
+        }
+
+        hasil_arr.push({"name":"REALISTIC","nilai":R})
+        hasil_arr.push({"name":"INVESTIGATIVE","nilai":I})
+        hasil_arr.push({"name":"ARTISTIC","nilai":A})
+        hasil_arr.push({"name":"SOCIAL","nilai":S})
+        hasil_arr.push({"name":"ENTERPRISING","nilai":E})
+        hasil_arr.push({"name":"CONFIDENTIAL","nilai":C})
+
+        hasil_arr = hasil_arr.sort((a,b) => (a.nilai < b.nilai) ? 1 : ((b.nilai < a.nilai) ? -1 : 0))
+        hasil_arr = hasil_arr.slice(0,3)
+        var hasil = ""
+        hasil_arr.forEach((val,idx) => {
+            hasil += val.name
+            if(idx < 2) hasil += " - "
+        })
+
+        rows += "<td>"+R+"</td>"
+        rows += "<td>"+I+"</td>"
+        rows += "<td>"+A+"</td>"
+        rows += "<td>"+S+"</td>"
+        rows += "<td>"+E+"</td>"
+        rows += "<td>"+C+"</td>"
+        rows += "<td>"+_R[1]+"</td>"
+        rows += "<td>"+_R[2]+"</td>"
+        rows += "<td>"+_R[3]+"</td>"
+        rows += "<td>"+_R[4]+"</td>"
+        rows += "<td>"+_R[5]+"</td>"
+        rows += "<td>"+_I[1]+"</td>"
+        rows += "<td>"+_I[2]+"</td>"
+        rows += "<td>"+_I[3]+"</td>"
+        rows += "<td>"+_I[4]+"</td>"
+        rows += "<td>"+_I[5]+"</td>"
+        rows += "<td>"+_A[1]+"</td>"
+        rows += "<td>"+_A[2]+"</td>"
+        rows += "<td>"+_A[3]+"</td>"
+        rows += "<td>"+_A[4]+"</td>"
+        rows += "<td>"+_A[5]+"</td>"
+        rows += "<td>"+_S[1]+"</td>"
+        rows += "<td>"+_S[2]+"</td>"
+        rows += "<td>"+_S[3]+"</td>"
+        rows += "<td>"+_S[4]+"</td>"
+        rows += "<td>"+_S[5]+"</td>"
+        rows += "<td>"+_E[1]+"</td>"
+        rows += "<td>"+_E[2]+"</td>"
+        rows += "<td>"+_E[3]+"</td>"
+        rows += "<td>"+_E[4]+"</td>"
+        rows += "<td>"+_E[5]+"</td>"
+        rows += "<td>"+_C[1]+"</td>"
+        rows += "<td>"+_C[2]+"</td>"
+        rows += "<td>"+_C[3]+"</td>"
+        rows += "<td>"+_C[4]+"</td>"
+        rows += "<td>"+_C[5]+"</td>"
+        rows += "</tr>"
+    }
+
+    var html_response = "<title>LAPORAN MINAT BAKAT "+school.name+"</title>"
+
+    html_response += "<br>"
+    html_response += `<div>
+    <table id="report" width="100%" border="1" cellspacing="0" cellpadding="5">
+        <tr style="border:0px">
+            <td style="border:0px" colspan="2">NAMA SEKOLAH</td>
+            <td style="border:0px">:</td>
+            <td style="border:0px" colspan="36">${school.name}</td>
+        </tr>
+        <tr style="border:0px">
+            <td style="border:0px" colspan="2">TANGGAL PELAKSANAAN TES</td>
+            <td style="border:0px">:</td>
+            <td style="border:0px" colspan="36">${exam.start_time.split('T')[0]}</td>
+        </tr>
+        <tr style="background-color:#eaeaea;">
+            <th rowspan="2" style="text-align:center">NO</th>
+            <th rowspan="2" style="text-align:center">NAMA</th>
+            <th rowspan="2" style="text-align:center">NISN</th>
+            <th rowspan="2" style="text-align:center">R</th>
+            <th rowspan="2" style="text-align:center">I</th>
+            <th rowspan="2" style="text-align:center">A</th>
+            <th rowspan="2" style="text-align:center">S</th>
+            <th rowspan="2" style="text-align:center">E</th>
+            <th rowspan="2" style="text-align:center">C</th>
+            <th colspan="5" style="text-align:center">R</th>
+            <th colspan="5" style="text-align:center">I</th>
+            <th colspan="5" style="text-align:center">A</th>
+            <th colspan="5" style="text-align:center">S</th>
+            <th colspan="5" style="text-align:center">E</th>
+            <th colspan="5" style="text-align:center">C</th>
+        </tr>
+        <tr style="background-color:#eaeaea;">
+            <th style="text-align:center">1</th>
+            <th style="text-align:center">2</th>
+            <th style="text-align:center">3</th>
+            <th style="text-align:center">4</th>
+            <th style="text-align:center">5</th>
+            <th style="text-align:center">1</th>
+            <th style="text-align:center">2</th>
+            <th style="text-align:center">3</th>
+            <th style="text-align:center">4</th>
+            <th style="text-align:center">5</th>
+            <th style="text-align:center">1</th>
+            <th style="text-align:center">2</th>
+            <th style="text-align:center">3</th>
+            <th style="text-align:center">4</th>
+            <th style="text-align:center">5</th>
+            <th style="text-align:center">1</th>
+            <th style="text-align:center">2</th>
+            <th style="text-align:center">3</th>
+            <th style="text-align:center">4</th>
+            <th style="text-align:center">5</th>
+            <th style="text-align:center">1</th>
+            <th style="text-align:center">2</th>
+            <th style="text-align:center">3</th>
+            <th style="text-align:center">4</th>
+            <th style="text-align:center">5</th>
+            <th style="text-align:center">1</th>
+            <th style="text-align:center">2</th>
+            <th style="text-align:center">3</th>
+            <th style="text-align:center">4</th>
+            <th style="text-align:center">5</th>
+        </tr>
+        ${rows}
+    </table></div>
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="/api/uploads/tableToExcel.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        tableToExcel('report', '${school.name}')
+    </script> 
+    `
+
+    res.type("text/html");
+    res.send(html_response);
+}
+
+exports.download = async function(req, res)
+{
+    var user = await User.findById(req.params.user_id)
+
+    var html = `<div style="width:1280px;margin:auto;">
+                    <img src="/api/uploads/top.jpeg" width="100%" />
+                    <div style="margin:100px;margin-top:50px;">
+                    <table width="100%" border="1" cellpadding="5" cellspacing="0">
+                        <tr>
+                            <td rowspan="5" width="30%" style="line-height:1.5">
+                                <center>
+                                <b>LAPORAN HASIL TES PEMINATAN ONLINE</b>
+                                </center>
+                            </td>
+                            <td width="15%">Nama</td>
+                            <td width="3%" style="text-align:center">:</td>
+                            <td>${user.name}</td>
+                        </tr>
+                        <tr>
+                            <td width="20%">NISN</td>
+                            <td style="text-align:center">:</td>
+                            <td>${user.username}</td>
+                        </tr>
+                        <tr>
+                            <td width="20%">Tempat, Tanggal Lahir</td>
+                            <td style="text-align:center">:</td>
+                            <td>${user.metas.tempat_tanggal_lahir}</td>
+                        </tr>
+                        <tr>
+                            <td width="20%">Asal Sekolah</td>
+                            <td style="text-align:center">:</td>
+                            <td>${user.metas.school.name}</td>
+                        </tr>
+                        <tr>
+                            <td width="20%">Tanggal Pemeriksaan</td>
+                            <td>:</td>
+                            <td>12 Agustus 2020</td>
+                        </tr>
+                    </table>
+                    <br><br><br>
+                    <br><br><br>
+                    <table width="100%" border="1" cellpadding="5" cellspacing="0">
+                        <tr style="font-weight:bold">
+                            <td width="5%">1.</td>
+                            <td width="30%">TINGKAT POTENSI AKADEMIK</td>
+                            <td width="3%" style="text-align:center">:</td>
+                            <td colspan="3" style="text-align:center">${user.metas.predikat}</td>
+                        </tr>
+                        <tr style="font-weight:bold">
+                            <td>2.</td>
+                            <td colspan="6">HASIL TES PEMINATAN ONLINE</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Kelompok Soal Peminatan IPA</td>
+                            <td style="text-align:center">:</td>
+                            <td colspan="3" style="text-align:center"><b>${user.metas.nilai_ipa}</b></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Kelompok Soal Peminatan IPS</td>
+                            <td style="text-align:center">:</td>
+                            <td colspan="3" style="text-align:center"><b>${user.metas.nilai_ips}</b></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Kelompok Soal Peminatan Bahasa</td>
+                            <td style="text-align:center">:</td>
+                            <td colspan="3" style="text-align:center"><b>${user.metas.nilai_bahasa}</b></td>
+                        </tr>
+                        <tr style="font-weight:bold">
+                            <td>3.</td>
+                            <td>JURUSAN SMA</td>
+                            <td style="text-align:center">:</td>
+                            <td colspan="3" style="text-align:center"><b>${user.metas.jurusan}</b></td>
+                        </tr>
+                        <tr style="font-weight:bold">
+                            <td>4.</td>
+                            <td>BAKAT DAN MINAT</td>
+                            <td style="text-align:center">:</td>
+                            <td><b></b></td>
+                            <td><b></b></td>
+                            <td><b></b></td>
+                        </tr>
+                        <tr style="font-weight:bold">
+                            <td>5.</td>
+                            <td>ALTERNATIF JURUSAN DI PERGURUAN TINGGI</td>
+                            <td style="text-align:center">:</td>
+                            <td colspan="3" style="text-align:center">Terlampir - </td>
+                        </tr>
+                    </table>
+                    </div>
+                    <br><br><br>
+                    <br><br><br>
+                    <br><br><br>
+                    <br><br><br>
+                    <img src="/api/uploads/bottom.jpeg" width="100%" />
+                </div><script>window.print()</script>`
+
+    res.type("text/html");
+    res.send(html)
+    // res.json({
+    //     message:'data user',
+    //     data: await user
+    // })
 }
 
 exports.printacara = async (req,res) => {
