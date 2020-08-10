@@ -662,8 +662,8 @@ exports.report = async (req,res) => {
         hasil_arr.push({"name":"INVESTIGATIVE","nilai":I})
         hasil_arr.push({"name":"ARTISTIC","nilai":A})
         hasil_arr.push({"name":"SOCIAL","nilai":S})
-        hasil_arr.push({"name":"ENTERPRISING","nilai":E})
-        hasil_arr.push({"name":"CONFIDENTIAL","nilai":C})
+        hasil_arr.push({"name":"ENTERPRENUER","nilai":E})
+        hasil_arr.push({"name":"CONVENTIONAL","nilai":C})
 
         hasil_arr = hasil_arr.sort((a,b) => (a.nilai < b.nilai) ? 1 : ((b.nilai < a.nilai) ? -1 : 0))
         hasil_arr = hasil_arr.slice(0,3)
@@ -893,8 +893,8 @@ exports.reportDetail = async (req,res) => {
         hasil_arr.push({"name":"INVESTIGATIVE","nilai":I})
         hasil_arr.push({"name":"ARTISTIC","nilai":A})
         hasil_arr.push({"name":"SOCIAL","nilai":S})
-        hasil_arr.push({"name":"ENTERPRISING","nilai":E})
-        hasil_arr.push({"name":"CONFIDENTIAL","nilai":C})
+        hasil_arr.push({"name":"ENTERPRENUER","nilai":E})
+        hasil_arr.push({"name":"CONVENTIONAL","nilai":C})
 
         hasil_arr = hasil_arr.sort((a,b) => (a.nilai < b.nilai) ? 1 : ((b.nilai < a.nilai) ? -1 : 0))
         hasil_arr = hasil_arr.slice(0,3)
