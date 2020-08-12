@@ -230,6 +230,43 @@ exports.view = async function (req, res) {
     });
 };
 
+exports.resetParticipant = async function (req, res) {
+    var exam = await Exam.findById(req.params.exam_id)
+    var _exam = JSON.stringify(exam)
+        _exam = JSON.parse(_exam)
+    var users = _exam.participants
+    var all_users = []
+    for(var i=0;i<users.length;i++)
+    {
+        var user = await User.findById(users[i]._id)
+        if(!user) continue
+        // user = JSON.stringify(user)
+        // user = JSON.parse(user)
+        // delete user.metas.sequences
+        // delete user.metas.sequences
+        // delete user.sequences
+
+        var mUser = await User.findOneAndUpdate({
+            _id:users[i]._id,
+        },{
+            $pull:{"metas.sequences":{}},
+            $unset:{
+                "metas.end_time":true,
+                "metas.exam_finished":true,
+                "metas.seqActive":true,
+                "metas.start_time":true
+            }
+            // metas: user.metas,
+        })
+        all_users.push(mUser)
+    }
+
+    res.json({
+        message: 'Exam participant reset...',
+        all_users: all_users
+    });
+};
+
 exports.update = function (req, res) {
     Exam.findById(req.params.exam_id, async function (err, exam) {
         if (err)
