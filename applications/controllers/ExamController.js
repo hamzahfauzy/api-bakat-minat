@@ -170,7 +170,7 @@ exports.view = async function (req, res) {
         delete user.metas.school
         // delete user.sequences
         var sequences = user.metas.sequences
-        if(typeof sequences === 'undefined'){
+        if(typeof sequences === 'undefined' || !sequences.length){
             user.metas.NISN = participant.nis
             reports.push(user)
             continue
@@ -251,6 +251,7 @@ exports.resetParticipant = async function (req, res) {
         },{
             $pull:{"metas.sequences":{}},
             $unset:{
+                "metas.end_time":true,
                 "metas.end_time":true,
                 "metas.exam_finished":true,
                 "metas.seqActive":true,
