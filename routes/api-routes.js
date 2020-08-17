@@ -36,6 +36,7 @@ router.get('/exams/report/:exam_id',examController.report)
 router.get('/exams/reset/:exam_id',examController.resetParticipant)
 router.get('/exams/report-detail/:exam_id',examController.reportDetail)
 router.get('/exams/berita-acara/:exam_id',examController.printacara)
+router.post('/exams/import-nilai/:exam_id',examController.importNilai)
 
 router.post('/login', userController.login)
 router.post('/register-admin', userController.register)

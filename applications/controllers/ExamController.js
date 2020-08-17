@@ -5,6 +5,8 @@ Post = require('./../models/Post')
 School = require('./../models/School')
 Pengumuman = require('./../models/Pengumuman')
 Sequence = require('./../models/Sequence')
+fs = require('fs')
+var pdf = require('html-pdf');
 var mongoose = require('mongoose');
 var mv = require('mv');
 var path = require('path');
@@ -12,6 +14,75 @@ var appDir = path.dirname(require.main.filename);
 var formidable = require('formidable')
 const readXlsxFile = require('read-excel-file/node')
 var xl = require('excel4node');
+
+exports.importNilai = function (req, res) {
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, files) {
+        var oldpath = files.inputUpload.path;
+        var newpath = appDir + "/uploads/" + files.inputUpload.name
+        mv(oldpath, newpath, function (err) {
+            readXlsxFile(newpath).then(async (rows) => {
+                // Remove Header ROW
+                // rows.shift();
+                var students = []
+                for(var i=0;i<rows.length;i++)
+                {
+                    var val = rows[i]
+                    var username = val[1].replace(/'/g, "")
+                    var user_exists = await User.findOne({
+                        name: val[0],
+                        username:username
+                    })
+                    var metas = {}
+                    if(user_exists)
+                    {
+                        metas = JSON.stringify(user_exists.metas)
+                        metas = JSON.parse(metas)
+                    }
+                    metas.exam_finished = true
+                    metas.tempat_tanggal_lahir = val[2]
+                    metas.nilai_bahasa = val[3]
+                    metas.nilai_ips = val[4]
+                    metas.nilai_ipa = val[5]
+                    metas.jurusan   = val[6]
+                    metas.total_nilai = val[7]
+                    metas.predikat  = val[8]
+                    metas.nilai = {
+                        R: val[9],
+                        I: val[10],
+                        A: val[11],
+                        S: val[12],
+                        E: val[13],
+                        C: val[14],
+                        hasil: val[15]
+                    }
+                    var user = await User.findOneAndUpdate({
+                        name: val[0],
+                        username:username
+                    },{
+                        name: val[0],
+                        username: username,
+                        password: 123,
+                        isAdmin: false,
+                        status: true,
+                        metas: metas,
+                    },{new:true,upsert:true})
+                    students.push({
+                        _id:user._id,
+                        nis:username,
+                        name:val[0],
+                    })
+                }
+
+                res.json({
+                    message:'import nilai success',
+                    data:students
+                })
+            })
+        })
+    })
+    
+};
 
 exports.pengumuman = async function (req, res)
 {
@@ -1062,14 +1133,14 @@ exports.download = async function(req, res)
 {
     var user = await User.findById(req.params.user_id)
 
-    var html = `<div style="width:1280px;margin:auto;">
-                    <img src="/api/uploads/top.jpeg" width="100%" />
-                    <div style="margin:100px;margin-top:50px;">
-                    <table width="100%" border="1" cellpadding="5" cellspacing="0">
+    var html = `<div style="margin:auto;">
+                    <img src="http://tmc.minat-bakat.id:8000/api/uploads/top.jpeg" width="100%" />
+                    <div style="width:18cm;margin:auto;margin-top:30px;">
+                    <table width="100%" border="1" cellpadding="5" cellspacing="0" style="font-size:12px">
                         <tr>
                             <td rowspan="5" width="30%" style="line-height:1.5">
                                 <center>
-                                <b>LAPORAN HASIL TES PEMINATAN ONLINE</b>
+                                <b>LAPORAN HASIL TES POTENSI AKADEMIK PEMINATAN</b>
                                 </center>
                             </td>
                             <td width="15%">Nama</td>
@@ -1098,8 +1169,7 @@ exports.download = async function(req, res)
                         </tr>
                     </table>
                     <br><br><br>
-                    <br><br><br>
-                    <table width="100%" border="1" cellpadding="5" cellspacing="0">
+                    <table width="100%" border="1" cellpadding="5" cellspacing="0" style="font-size:12px">
                         <tr style="font-weight:bold">
                             <td width="5%">1.</td>
                             <td width="30%">TINGKAT POTENSI AKADEMIK</td>
@@ -1138,9 +1208,9 @@ exports.download = async function(req, res)
                             <td>4.</td>
                             <td>BAKAT DAN MINAT</td>
                             <td style="text-align:center">:</td>
-                            <td><b></b></td>
-                            <td><b></b></td>
-                            <td><b></b></td>
+                            <td style="text-align:center"><b>${user.metas.nilai.hasil.split(" - ")[0]}</b></td>
+                            <td style="text-align:center"><b>${user.metas.nilai.hasil.split(" - ")[1]}</b></td>
+                            <td style="text-align:center"><b>${user.metas.nilai.hasil.split(" - ")[2]}</b></td>
                         </tr>
                         <tr style="font-weight:bold">
                             <td>5.</td>
@@ -1150,18 +1220,34 @@ exports.download = async function(req, res)
                         </tr>
                     </table>
                     </div>
-                    <br><br><br>
-                    <br><br><br>
-                    <br><br><br>
-                    <br><br><br>
-                    <img src="/api/uploads/bottom.jpeg" width="100%" />
-                </div><script>window.print()</script>`
+                    <br><br>
+                    <img src="http://tmc.minat-bakat.id:8000/api/uploads/bottom.png" width="100%" />
+                    <img src="http://tmc.minat-bakat.id:8000/api/uploads/lampiran.jpg" width="100%" />
+                </div>`
 
-    res.type("text/html");
-    res.send(html)
+    // res.type("text/html");
+    // res.send(html)
+
+    var options = { 
+        format: 'A4',
+        // width: '21cm',
+        // height: '33cm',
+        orientation: "portrait"
+    };
+
+    var rsp = res
+
+    pdf.create(html,options).toFile('./uploads/'+user.username+'.pdf', function(err, res){
+        console.log(res.filename);
+        // var filePath = "/files/my_pdf_file.pdf";
+
+        fs.readFile(res.filename, function (err,data){
+            rsp.contentType("application/pdf");
+            rsp.send(data);
+        });
+    });
     // res.json({
-    //     message:'data user',
-    //     data: await user
+    //     message:'data user'
     // })
 }
 
