@@ -1240,11 +1240,11 @@ exports.download = async function(req, res)
     pdf.create(html,options).toFile('./uploads/'+user.name+'.pdf', function(err, res){
         console.log(res.filename);
         // var filePath = "/files/my_pdf_file.pdf";
+        rsp.download(res.filename);
 
-        fs.readFile(res.filename, function (err,data){
-            rsp.contentType("application/pdf");
-            rsp.send(data);
-        });
+        // fs.readFile(res.filename, function (err,data){
+        //     rsp.contentType("application/pdf");
+        // });
     });
     // res.json({
     //     message:'data user'
