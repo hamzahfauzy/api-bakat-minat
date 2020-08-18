@@ -1140,7 +1140,7 @@ exports.download = async function(req, res)
                         <tr>
                             <td rowspan="5" width="30%" style="line-height:1.5">
                                 <center>
-                                <b>LAPORAN HASIL TES POTENSI AKADEMIK PEMINATAN DAN PEMINATAN</b>
+                                <b>LAPORAN HASIL TES POTENSI AKADEMIK DAN PEMINATAN</b>
                                 </center>
                             </td>
                             <td width="15%">Nama</td>
