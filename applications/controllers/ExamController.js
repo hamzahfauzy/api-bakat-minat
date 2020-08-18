@@ -1136,7 +1136,7 @@ exports.download = async function(req, res)
     var html = `<div style="margin:auto;">
                     <img src="http://tmc.minat-bakat.id:8000/api/uploads/top.jpeg" width="100%" />
                     <div style="width:90%;margin:auto;margin-top:30px;">
-                    <table width="100%" border="1" cellpadding="5" cellspacing="0" style="font-size:10px!important">
+                    <table width="100%" border="1" cellpadding="5" cellspacing="0" style="font-size:8px!important">
                         <tr>
                             <td rowspan="5" width="30%" style="line-height:1.5">
                                 <center>
@@ -1169,7 +1169,7 @@ exports.download = async function(req, res)
                         </tr>
                     </table>
                     <br><br><br>
-                    <table width="100%" border="1" cellpadding="5" cellspacing="0" style="font-size:10px!important">
+                    <table width="100%" border="1" cellpadding="5" cellspacing="0" style="font-size:8px!important">
                         <tr style="font-weight:bold">
                             <td width="5%">1.</td>
                             <td width="30%">TINGKAT POTENSI AKADEMIK</td>
