@@ -1168,7 +1168,7 @@ exports.download = async function(req, res)
                             <td>12 Agustus 2020</td>
                         </tr>
                     </table>
-                    <br><br><br>
+                    <br>
                     <table width="100%" border="1" cellpadding="5" cellspacing="0" style="font-size:8px!important">
                         <tr style="font-weight:bold">
                             <td width="5%">1.</td>
@@ -1220,7 +1220,7 @@ exports.download = async function(req, res)
                         </tr>
                     </table>
                     </div>
-                    <br><br>
+                    <br>
                     <img src="http://tmc.minat-bakat.id:8000/api/uploads/bottom.png" width="100%" />
                     <img src="http://tmc.minat-bakat.id:8000/api/uploads/lampiran.jpg" width="100%" />
                 </div>`
