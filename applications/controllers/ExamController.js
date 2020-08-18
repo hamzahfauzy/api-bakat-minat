@@ -1140,7 +1140,7 @@ exports.download = async function(req, res)
                         <tr>
                             <td rowspan="5" width="30%" style="line-height:1.5">
                                 <center>
-                                <b>LAPORAN HASIL TES POTENSI AKADEMIK PEMINATAN</b>
+                                <b>LAPORAN HASIL TES POTENSI AKADEMIK PEMINATAN DAN PEMINATAN</b>
                                 </center>
                             </td>
                             <td width="15%">Nama</td>
@@ -1165,7 +1165,7 @@ exports.download = async function(req, res)
                         <tr>
                             <td width="20%">Tanggal Pemeriksaan</td>
                             <td>:</td>
-                            <td>12 Agustus 2020</td>
+                            <td>10 Agustus 2020</td>
                         </tr>
                     </table>
                     <br>
@@ -1208,9 +1208,9 @@ exports.download = async function(req, res)
                             <td>4.</td>
                             <td>BAKAT DAN MINAT</td>
                             <td style="text-align:center">:</td>
-                            <td style="text-align:center"><b>${user.metas.nilai.hasil.split(" - ")[0]}</b></td>
-                            <td style="text-align:center"><b>${user.metas.nilai.hasil.split(" - ")[1]}</b></td>
-                            <td style="text-align:center"><b>${user.metas.nilai.hasil.split(" - ")[2]}</b></td>
+                            <td style="text-align:center"><b>${user.metas.nilai.hasil == 'Tidak diketahui' ? 'Tidak diketahui' : user.metas.nilai.hasil.split(" - ")[0]}</b></td>
+                            <td style="text-align:center"><b>${user.metas.nilai.hasil == 'Tidak diketahui' ? 'Tidak diketahui' : user.metas.nilai.hasil.split(" - ")[1]}</b></td>
+                            <td style="text-align:center"><b>${user.metas.nilai.hasil == 'Tidak diketahui' ? 'Tidak diketahui' : user.metas.nilai.hasil.split(" - ")[2]}</b></td>
                         </tr>
                         <tr style="font-weight:bold">
                             <td>5.</td>
@@ -1237,7 +1237,7 @@ exports.download = async function(req, res)
 
     var rsp = res
 
-    pdf.create(html,options).toFile('./uploads/'+user.username+'.pdf', function(err, res){
+    pdf.create(html,options).toFile('./uploads/'+user.name+'.pdf', function(err, res){
         console.log(res.filename);
         // var filePath = "/files/my_pdf_file.pdf";
 
