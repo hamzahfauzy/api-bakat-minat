@@ -888,6 +888,251 @@ exports.reportDetail = async (req,res) => {
     {
         var n = i+1;
         rows += "<tr><td>"+n+"</td>"
+        // var row = i+2;
+        // var participant = users[i]
+        var user = await User.findById(users[i]._id)
+        if(!user) continue
+        user = JSON.stringify(user)
+        user = JSON.parse(user)
+        // delete user.metas.sequences
+        delete user.metas.school
+        // delete user.sequences
+        rows += "<td>"+user.name+"</td>"
+        rows += "<td>\'"+user.username+"</td>"
+        var sequences = user.metas.sequences
+        if(typeof sequences === 'undefined'){
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "</tr>"
+            continue
+        } 
+        var subtest = {
+            '2':1,
+            '4':2,
+            '6':3,
+            '8':4,
+            '10':5,
+            '12':6,
+            '14':7,
+            '16':8,
+        }
+
+        var subtest_value = {
+            '1':0,
+            '2':0,
+            '3':0,
+            '4':0,
+            '5':0,
+            '6':0,
+            '7':0,
+            '8':0,
+        }
+        // var subtest = 3, IPS = 0, IPA = 0, BAHASA1 = 0, BAHASA2 = 0, hasil1 = "", hasil2 = ""
+        // var subtest = 1
+        var hasil_arr = []
+        var subtest_R = [2,14,26]
+        var subtest_I = [4,16,28]
+        var subtest_A = [6,18,30]
+        var subtest_S = [8,20,32]
+        var subtest_E = [10,22,34]
+        var subtest_C = [12,24,36]
+        var R = 0, I = 0, A = 0, S = 0, E = 0, C = 0
+        var _R = {'1':0,'2':0,'3':0,'4':0,'5':0}
+        var _I = {'1':0,'2':0,'3':0,'4':0,'5':0}
+        var _A = {'1':0,'2':0,'3':0,'4':0,'5':0}
+        var _S = {'1':0,'2':0,'3':0,'4':0,'5':0}
+        var _E = {'1':0,'2':0,'3':0,'4':0,'5':0}
+        var _C = {'1':0,'2':0,'3':0,'4':0,'5':0}
+        for (var j = 0; j < sequences.length; j++) 
+        {
+            var quis = j+1
+            if(quis%2 != 0) continue;
+            if(quis <= 16)
+            {
+                var sequence = sequences[j].contents
+                var nilai = 0
+                for(var k = 0; k < sequence.length; k++)
+                {
+                    var content = sequence[k]
+                    // if(content.childs.length == 0) continue;
+                    if(typeof content.selected === 'undefined') continue
+                    var selected = content.selected
+                    var post = await Post.findById(selected)
+                    if(post) subtest_value[subtest[quis]]+=parseInt(post.type_as)
+                }
+            }
+            else
+            {
+                var q = quis-16
+                var sequence = sequences[j].contents
+                var nilai = 0
+                for(var k = 0; k < sequence.length; k++)
+                {
+                    var content = sequence[k]
+                    // if(content.childs.length == 0) continue;
+                    if(typeof content.selected === 'undefined') continue
+                    var selected = content.selected
+                    var post = await Post.findById(selected)
+                    if(post) nilai+=parseInt(post.type_as)
+                    if(subtest_R.includes(q))
+                        _R[parseInt(post.type_as)]++
+                    if(subtest_I.includes(q))
+                        _I[parseInt(post.type_as)]++
+                    if(subtest_A.includes(q))
+                        _A[parseInt(post.type_as)]++
+                    if(subtest_S.includes(q))
+                        _S[parseInt(post.type_as)]++
+                    if(subtest_E.includes(q))
+                        _E[parseInt(post.type_as)]++
+                    if(subtest_C.includes(q))
+                        _C[parseInt(post.type_as)]++
+                }
+
+                if(subtest_R.includes(q))
+                    R += nilai
+                if(subtest_I.includes(q))
+                    I += nilai
+                if(subtest_A.includes(q))
+                    A += nilai
+                if(subtest_S.includes(q))
+                    S += nilai
+                if(subtest_E.includes(q))
+                    E += nilai
+                if(subtest_C.includes(q))
+                    C += nilai
+            }
+        }
+
+        hasil_arr.push({"name":"REALISTIC","nilai":R})
+        hasil_arr.push({"name":"INVESTIGATIVE","nilai":I})
+        hasil_arr.push({"name":"ARTISTIC","nilai":A})
+        hasil_arr.push({"name":"SOCIAL","nilai":S})
+        hasil_arr.push({"name":"ENTERPRENUER","nilai":E})
+        hasil_arr.push({"name":"CONVENTIONAL","nilai":C})
+
+        hasil_arr = hasil_arr.sort((a,b) => (a.nilai < b.nilai) ? 1 : ((b.nilai < a.nilai) ? -1 : 0))
+        hasil_arr = hasil_arr.slice(0,3)
+        var hasil = ""
+        hasil_arr.forEach((val,idx) => {
+            hasil += val.name
+            if(idx < 2) hasil += " - "
+        })
+
+        var total = 0
+        subtest_value.forEach(val => total+=val)
+
+        rows += "<td>"+R+"</td>"
+        rows += "<td>"+I+"</td>"
+        rows += "<td>"+A+"</td>"
+        rows += "<td>"+S+"</td>"
+        rows += "<td>"+E+"</td>"
+        rows += "<td>"+C+"</td>"
+        rows += "<td>"+hasil+"</td>"
+        rows += "<td>"+subtest_value[1]+"</td>"
+        rows += "<td>"+subtest_value[2]+"</td>"
+        rows += "<td>"+subtest_value[3]+"</td>"
+        rows += "<td>"+subtest_value[4]+"</td>"
+        rows += "<td>"+subtest_value[5]+"</td>"
+        rows += "<td>"+subtest_value[6]+"</td>"
+        rows += "<td>"+subtest_value[7]+"</td>"
+        rows += "<td>"+subtest_value[8]+"</td>"
+        rows += "<td>"+total+"</td>"
+        rows += "<td>"+subtest_value[1]+"</td>"
+        rows += "<td>"+(subtest_value[3]+subtest_value[8])+"</td>"
+        rows += "<td>"+(subtest_value[6]+subtest_value[8]+subtest_value[3])+"</td>"
+        rows += "<td>"+(subtest_value[5])+"</td>"
+        rows += "<td>"+(subtest_value[4]+subtest_value[2])+"</td>"
+        rows += "<td>"+(subtest_value[5]+subtest_value[6])+"</td>"
+        rows += "</tr>"
+    }
+
+    var html_response = "<title>LAPORAN MINAT BAKAT "+school.name+"</title>"
+
+    html_response += "<br>"
+    html_response += `<div>
+    <table id="report" width="100%" border="1" cellspacing="0" cellpadding="5">
+        <tr style="background-color:#eaeaea;">
+            <th rowspan="2" style="text-align:center">NO</th>
+            <th rowspan="2" style="text-align:center">NAMA</th>
+            <th rowspan="2" style="text-align:center">NISN</th>
+            <th rowspan="2" colspan="7" style="text-align:center">HOLLAND</th>
+            <th rowspan="2" colspan="10" style="text-align:center">HASIL TES POTENSI AKADEMIK (TPA)</th>
+            <th rowspan="2" colspan="6" style="text-align:center">URAIAN PENILAIAN ASPEK BERPIKIR</th>
+        </tr>
+        <tr>
+            <th style="text-align:center">R</th>
+            <th style="text-align:center">I</th>
+            <th style="text-align:center">A</th>
+            <th style="text-align:center">S</th>
+            <th style="text-align:center">E</th>
+            <th style="text-align:center">C</th>
+            <th style="text-align:center">HASIL</th>
+            <th style="text-align:center">1</th>
+            <th style="text-align:center">2</th>
+            <th style="text-align:center">3</th>
+            <th style="text-align:center">4</th>
+            <th style="text-align:center">5</th>
+            <th style="text-align:center">6</th>
+            <th style="text-align:center">7</th>
+            <th style="text-align:center">8</th>
+            <th style="text-align:center">TOTAL</th>
+            <th style="text-align:center">DAYA TANGKAP (1)</th>
+            <th style="text-align:center">ANALISA MASALAH (3+8)</th>
+            <th style="text-align:center">FLEKSIBILITAS BERPIKIR (6+8+3)</th>
+            <th style="text-align:center">PEMECAHAN MASALAH (5)</th>
+            <th style="text-align:center">LOGIKA VERBAL (4+2)</th>
+            <th style="text-align:center">LOGIKA ANGKA (5+6)</th>
+        </tr>
+        ${rows}
+    </table></div>
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="/api/uploads/tableToExcel.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        tableToExcel('report', '${school.name}')
+    </script> 
+    `
+
+    res.type("text/html");
+    res.send(html_response);
+}
+
+exports.reportDetail2 = async (req,res) => {
+    // Create a new instance of a Workbook class
+    
+    var exam = await Exam.findById(req.params.exam_id)
+    var users = exam.participants
+    var school = await School.findById(exam.school_id)
+    users = JSON.stringify(users)
+    users = JSON.parse(users)
+    var rows = ""
+    for(var i=0;i<users.length;i++)
+    {
+        var n = i+1;
+        rows += "<tr><td>"+n+"</td>"
         var row = i+2;
         var participant = users[i]
         var user = await User.findById(users[i]._id)
@@ -969,7 +1214,7 @@ exports.reportDetail = async (req,res) => {
                 if(typeof content.selected === 'undefined') continue
                 var selected = content.selected
                 var post = await Post.findById(selected)
-                if(post) nilai+= parseInt(post.type_as)
+                if(post) nilai+=parseInt(post.type_as)
                 if(subtest_R.includes(quis))
                     _R[parseInt(post.type_as)]++
                 if(subtest_I.includes(quis))
