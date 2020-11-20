@@ -36,7 +36,7 @@ app.use('/api', apiRoutes)
 let mongoose = require('mongoose');
 
 // Connect to Mongoose and set connection variable
-mongoose.connect('mongodb://localhost/bakatminat', { useNewUrlParser: true});
+mongoose.connect('mongodb://localhost/smandel', { useNewUrlParser: true});
 var db = mongoose.connection;
 
 // Added check for DB connection
