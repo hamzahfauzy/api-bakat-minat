@@ -594,7 +594,7 @@ exports.report2 = async (req,res) => {
                 if(typeof content.selected === 'undefined') continue
                 var selected = content.selected
                 var post = await Post.findById(selected)
-                if(post && post.type_as == "correct answer") nilai++
+                if(post) nilai+=parseInt(post.type_as)
             }
             // user.nilai.push({
             //     title:sequences[j].title,
@@ -1423,7 +1423,7 @@ exports.startExam = async (req, res) => {
             content = JSON.parse(content)
             delete content.category
             var sub_contents = content.type_as == "question" ? await Post.find({'parent._id':new mongoose.Types.ObjectId(content._id)}).select('-parent') : {}
-            // sub_contents = sub_contents.length ? sub_contents.sort(() => Math.random() - 0.5) : {};
+            sub_contents = sub_contents.length && sub_contents.length == 4 ? sub_contents.sort(() => Math.random() - 0.5) : sub_contents;
             contents.push({
                 parent:content,
                 childs:sub_contents
