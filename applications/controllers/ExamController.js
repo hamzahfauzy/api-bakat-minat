@@ -1653,15 +1653,15 @@ exports.startExam = async (req, res) => {
         metas[""+val] = req.body[val]
     })
 
-    console.log(metas)
+    // console.log(metas)
 
 
-    res.json({
-        status: "success",
-        message: 'Exam start'
-    });
+    // res.json({
+    //     status: "success",
+    //     message: 'Exam start'
+    // });
 
-    return
+    // return
 
     
     
