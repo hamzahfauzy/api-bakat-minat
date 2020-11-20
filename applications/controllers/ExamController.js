@@ -1647,7 +1647,14 @@ exports.startExam = async (req, res) => {
     metas = JSON.parse(metas)
     var req_metas = Object.keys(req.body)
 
-    console.log(req_metas)
+    // console.log(req.body)
+
+    req_metas.forEach(val => {
+        metas[""+val] = req.body[val]
+    })
+
+    console.log(metas)
+
 
     res.json({
         status: "success",
@@ -1655,10 +1662,6 @@ exports.startExam = async (req, res) => {
     });
 
     return
-
-    req_metas.forEach(val => {
-        metas[""+val] = req.body[val]
-    })
 
     
     
