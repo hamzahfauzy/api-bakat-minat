@@ -1647,26 +1647,20 @@ exports.startExam = async (req, res) => {
     metas = JSON.parse(metas)
     var req_metas = Object.keys(req.body)
 
-    // console.log(req.body)
-
     req_metas.forEach(val => {
         metas[""+val] = req.body[val]
-    })
-
-    // console.log(metas)
-
-
-    // res.json({
-    //     status: "success",
-    //     message: 'Exam start'
-    // });
-
-    // return
-
-    
+    }) 
     
     // var exam = await Exam.findById(req.body.exam_id).populate('participants')
     var _sequences = await Sequence.find({})
+
+    res.json({
+        status: "success",
+        message: 'Exam start',
+        data:_sequences
+    });
+
+    return
     var sequences = []
     for(var i=0;i<_sequences.length;i++)
     {
