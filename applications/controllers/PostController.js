@@ -120,19 +120,36 @@ exports.importPosts = async function (req, res) {
                 })
                 let postSave = await post.save()
                 // console.log('post')
-
-                for(idx=1;idx<=5;idx++){
-                    if(val[2+idx] === undefined) continue
-                    const answer = new Post({
-                        title:'Jawaban '+idx+' Soal '+i,
-                        description: val[2+idx],
-                        parent: postSave,
-                        type_as: idx // == 1 ? 'correct answer' : 'answer'
-                    })
-                    await answer.save()
-                    // let answerSave = 
-                    // console.log('answer')
+                // soal tpo
+                if(val[7] === undefined){
+                    for(idx=1;idx<=4;idx++){
+                        const answer = new Post({
+                            title:'Jawaban '+idx+' Soal '+i,
+                            description: val[2+idx],
+                            parent: postSave,
+                            type_as: idx == 1 ? 1 : 0
+                        })
+                        await answer.save()
+                        // let answerSave = 
+                        // console.log('answer')
+                    }
                 }
+                else
+                {
+                    for(idx=1;idx<=5;idx++){
+                    
+                        const answer = new Post({
+                            title:'Jawaban '+idx+' Soal '+i,
+                            description: val[2+idx],
+                            parent: postSave,
+                            type_as: idx // == 1 ? 'correct answer' : 'answer'
+                        })
+                        await answer.save()
+                        // let answerSave = 
+                        // console.log('answer')
+                    }
+                }
+                
             }
             res.json({
                 rows:rows,
