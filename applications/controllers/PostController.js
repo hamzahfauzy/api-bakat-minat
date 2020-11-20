@@ -113,7 +113,7 @@ exports.importPosts = async function (req, res) {
                 // console.log('subcategory')
 
                 const post = new Post({
-                    title:'Soal Holland '+i,
+                    title:'Soal Exam '+i,
                     description: val[2],
                     category: subcategory,
                     type_as: 'question'
@@ -122,13 +122,15 @@ exports.importPosts = async function (req, res) {
                 // console.log('post')
 
                 for(idx=1;idx<=5;idx++){
+                    if(val[2+idx] === undefined) continue
                     const answer = new Post({
                         title:'Jawaban '+idx+' Soal '+i,
                         description: val[2+idx],
                         parent: postSave,
                         type_as: idx // == 1 ? 'correct answer' : 'answer'
                     })
-                    let answerSave = await answer.save()
+                    await answer.save()
+                    // let answerSave = 
                     // console.log('answer')
                 }
             }
