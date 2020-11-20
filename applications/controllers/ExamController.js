@@ -1647,7 +1647,7 @@ exports.startExam = async (req, res) => {
     metas = JSON.parse(metas)
     var req_metas = Object.keys(req.body)
 
-    console.log(req_meta)
+    console.log(req_metas)
 
     res.json({
         status: "success",
