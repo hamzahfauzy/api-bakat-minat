@@ -90,18 +90,17 @@ exports.importStudents = function (req, res) {
                                 metas = JSON.parse(metas)
                             }
                             metas.school = school
-                            metas.tempat_tanggal_lahir = val[2]
-                            metas.nilai_bahasa = val[3]
-                            metas.nilai_ips = val[4]
-                            metas.nilai_ipa = val[5]
-                            metas.jurusan   = val[6]
-                            metas.total_nilai = val[7]
-                            metas.predikat  = val[8]
+                            metas.NISN = val[2]
+                            metas.nama_lengkap = val[3]
+                            metas.tempat_lahir = val[4]
+                            metas.tanggal_lahir = val[5]
+                            metas.jenis_kelamin   = val[6]
+                            metas.agama = val[7]
                             var user = await User.findOneAndUpdate({
-                                name: val[0],
+                                name: val[3],
                                 username:username
                             },{
-                                name: val[0],
+                                name: val[3],
                                 username: username,
                                 password: 123,
                                 isAdmin: false,

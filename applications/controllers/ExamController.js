@@ -401,13 +401,14 @@ exports.importParticipants = function (req, res) {
                 var participants = []
                 for(var i=1;i<rows.length;i++)
                 {
+                    var username = val[1].replace(/'/g, "")
                     var val = rows[i]
                     var user = await User.findOneAndUpdate({
-                        name: val[2],
-                        username:val[1],
+                        name: val[3],
+                        username:username,
                     },{
-                        name: val[2],
-                        username: val[1],
+                        name: val[3],
+                        username: username,
                         password: 123,
                         isAdmin: false,
                         status: true,
@@ -417,8 +418,8 @@ exports.importParticipants = function (req, res) {
                     },{new:true,upsert:true})
                     participants.push({
                             _id:user._id,
-                            nis:val[1],
-                            name:val[2]
+                            nis:username,
+                            name:val[3]
                         
                     })
                 }
