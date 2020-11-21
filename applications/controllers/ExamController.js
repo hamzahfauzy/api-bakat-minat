@@ -983,7 +983,7 @@ exports.reportDetail = async (req,res) => {
                     if(typeof content.selected === 'undefined') continue
                     var selected = content.selected
                     var post = await Post.findById(selected)
-                    if(post) subtest_value[subtest[quis]]+=parseInt(post.type_as)
+                    if(post) subtest_value[""+subtest[quis]]+=parseInt(post.type_as)
                 }
             }
             else
@@ -1044,7 +1044,9 @@ exports.reportDetail = async (req,res) => {
         })
 
         var total = 0
-        subtest_value.forEach(val => total+=val)
+        for(var i=1;i<=8;i++)
+            total += subtest_value[''+i]
+        // subtest_value.forEach(val => total+=val)
 
         rows += "<td>"+R+"</td>"
         rows += "<td>"+I+"</td>"
