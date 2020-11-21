@@ -1082,9 +1082,9 @@ exports.reportDetail = async (req,res) => {
             <th rowspan="2" style="text-align:center">NO</th>
             <th rowspan="2" style="text-align:center">NAMA</th>
             <th rowspan="2" style="text-align:center">NISN</th>
-            <th rowspan="2" colspan="7" style="text-align:center">HOLLAND</th>
-            <th rowspan="2" colspan="10" style="text-align:center">HASIL TES POTENSI AKADEMIK (TPA)</th>
-            <th rowspan="2" colspan="6" style="text-align:center">URAIAN PENILAIAN ASPEK BERPIKIR</th>
+            <th colspan="7" style="text-align:center">HOLLAND</th>
+            <th colspan="9" style="text-align:center">HASIL TES POTENSI AKADEMIK (TPA)</th>
+            <th colspan="6" style="text-align:center">URAIAN PENILAIAN ASPEK BERPIKIR</th>
         </tr>
         <tr>
             <th style="text-align:center">R</th>
