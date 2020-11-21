@@ -1698,6 +1698,42 @@ exports.startExam = async (req, res) => {
     });
 }
 
+exports.startExamDemo = async (req, res) => {
+    
+    // var exam = await Exam.findById(req.body.exam_id).populate('participants')
+    var _sequences = await Sequence.find({})
+    var sequences = []
+    for(var i=0;i<_sequences.length;i++)
+    {
+        var sequence = _sequences[i]
+        sequence = JSON.stringify(sequence)
+        sequence = JSON.parse(sequence)
+        var contents = []
+        for(var j=0;j<sequence.contents.length;j++)
+        {
+            var content = JSON.stringify(sequence.contents[j])
+            content = JSON.parse(content)
+            delete content.category
+            var sub_contents = content.type_as == "question" ? await Post.find({'parent._id':new mongoose.Types.ObjectId(content._id)}).select('-parent') : {}
+            sub_contents = sub_contents.length && sub_contents.length == 4 ? sub_contents.sort(() => Math.random() - 0.5) : sub_contents;
+            contents.push({
+                parent:content,
+                childs:sub_contents
+            })
+        }
+        sequence.contents = contents
+        sequences.push(sequence)
+    }
+    
+    sequences = sequences.sort((a,b) => (a.order > b.order) ? 1 : ((b.order > a.order) ? -1 : 0))
+    
+    res.json({
+        status: "success",
+        message: 'Exam start',
+        data:sequences
+    });
+}
+
 exports.sendUserSequence = async (req, res) => {
     var user = await User.findById(req.user._id)
     var metas = JSON.stringify(user.metas)
