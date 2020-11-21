@@ -259,6 +259,7 @@ exports.view = async function (req, res) {
         {
             var quis = j+1
             if(quis%2 != 0) continue;
+            var q = quis-16
             var sequence = sequences[j].contents
             var nilai = 0
             for(var k = 0; k < sequence.length; k++)
@@ -271,17 +272,17 @@ exports.view = async function (req, res) {
                 if(post) nilai+= parseInt(post.type_as)
             }
 
-            if(subtest_R.includes(quis))
+            if(subtest_R.includes(q))
                 R += nilai
-            if(subtest_I.includes(quis))
+            if(subtest_I.includes(q))
                 I += nilai
-            if(subtest_A.includes(quis))
+            if(subtest_A.includes(q))
                 A += nilai
-            if(subtest_S.includes(quis))
+            if(subtest_S.includes(q))
                 S += nilai
-            if(subtest_E.includes(quis))
+            if(subtest_E.includes(q))
                 E += nilai
-            if(subtest_C.includes(quis))
+            if(subtest_C.includes(q))
                 C += nilai
         }
         
