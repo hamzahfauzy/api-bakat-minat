@@ -110,7 +110,7 @@ exports.importStudents = function (req, res) {
                             students.push({
                                 _id:user._id,
                                 nis:username,
-                                name:val[0],
+                                name:val[3],
                             })
                         }
                     school.students = students
