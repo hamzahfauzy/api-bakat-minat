@@ -75,12 +75,12 @@ exports.importStudents = function (req, res) {
                         return
                     }
                         var students = []
-                        for(var i=0;i<rows.length;i++)
+                        for(var i=1;i<rows.length;i++)
                         {
                             var val = rows[i]
                             var username = val[1].replace(/'/g, "")
                             var user_exists = await User.findOne({
-                                name: val[0],
+                                name: val[3],
                                 username:username
                             })
                             var metas = {}
