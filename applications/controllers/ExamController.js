@@ -924,10 +924,6 @@ exports.reportDetail = async (req,res) => {
             rows += "<td></td>"
             rows += "<td></td>"
             rows += "<td></td>"
-            rows += "<td></td>"
-            rows += "<td></td>"
-            rows += "<td></td>"
-            rows += "<td></td>"
             rows += "</tr>"
             continue
         } 
