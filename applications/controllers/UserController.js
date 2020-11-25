@@ -201,7 +201,7 @@ exports.delete = function (req, res) {
 };
 
 exports.resetUser = async (req, res) => {
-    var user = await User.findById(req.params.participant_id)
+    var user = await User.findById(req.params.user_id)
     var metas = JSON.stringify(user.metas)
     metas = JSON.parse(metas)
     delete metas.sequences
@@ -211,7 +211,7 @@ exports.resetUser = async (req, res) => {
     delete metas.end_time
 
     var userUpdate = await User.findOneAndUpdate({
-        _id: req.params.participant_id,
+        _id: req.params.user_id,
     },{
         metas: metas
     })
