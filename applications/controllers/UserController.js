@@ -200,7 +200,7 @@ exports.delete = function (req, res) {
     });
 };
 
-exports.resetUser = (req, res) => {
+exports.resetUser = async (req, res) => {
     var user = await User.findById(req.params.participant_id)
     var metas = JSON.stringify(user.metas)
     metas = JSON.parse(metas)
