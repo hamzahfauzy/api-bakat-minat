@@ -211,7 +211,7 @@ exports.resetUser = async (req, res) => {
     delete metas.end_time
 
     var userUpdate = await User.findOneAndUpdate({
-        _id: req.user._id,
+        _id: req.params.participant_id,
     },{
         metas: metas
     })
