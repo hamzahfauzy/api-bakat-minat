@@ -34,7 +34,6 @@ router.get('/tanggal-pengumuman',examController.pengumuman)
 router.get('/exams/download/:user_id',examController.download)
 router.get('/exams/report/:exam_id',examController.report)
 router.get('/exams/reset/:exam_id',examController.resetParticipant)
-router.get('/exams/reset-by-participant/:participant_id',examController.resetByParticipant)
 router.get('/exams/report-detail/:exam_id',examController.reportDetail)
 router.get('/exams/berita-acara/:exam_id',examController.printacara)
 router.post('/exams/import-nilai/:exam_id',examController.importNilai)
@@ -60,11 +59,14 @@ router.use(admin)
 router.route('/users')
     .get(userController.index)
     .post(userController.new);
+
 router.route('/users/:user_id')
     .get(userController.view)
     // .patch(userController.update)
     .put(userController.update)
     .delete(userController.delete);
+
+router.get('/users/:user_id/reset',userController.resetUser)
 
 router.route('/categories')
     .get(categoryController.index)

@@ -1698,28 +1698,6 @@ exports.startExam = async (req, res) => {
     });
 }
 
-exports.resetByParticipant = (req, res) => {
-    var user = await User.findById(req.params.participant_id)
-    var metas = JSON.stringify(user.metas)
-    metas = JSON.parse(metas)
-    delete metas.sequences
-    delete metas.seqActive
-    delete metas.start_time
-    delete metas.exam_finished
-    delete metas.end_time
-
-    var userUpdate = await User.findOneAndUpdate({
-        _id: req.user._id,
-    },{
-        metas: metas
-    })
-    res.json({
-        status: "success",
-        message: 'Reset Participant Success',
-        user:userUpdate
-    });
-}
-
 exports.startExamDemo = async (req, res) => {
     
     // var exam = await Exam.findById(req.body.exam_id).populate('participants')
