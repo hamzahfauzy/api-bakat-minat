@@ -255,6 +255,7 @@ exports.view = async function (req, res) {
         var subtest_E = [10,22,34]
         var subtest_C = [12,24,36]
         var R = 0, I = 0, A = 0, S = 0, E = 0, C = 0
+        var total_tpo = 0
         for (var j = 0; j < sequences.length; j++) 
         {
             var quis = j+1
@@ -271,6 +272,9 @@ exports.view = async function (req, res) {
                 var post = await Post.findById(selected)
                 if(post) nilai+= parseInt(post.type_as)
             }
+
+            if(quis <= 16)
+                total_tpo += nilai
 
             if(subtest_R.includes(q))
                 R += nilai
@@ -292,6 +296,7 @@ exports.view = async function (req, res) {
         user["S"] = S
         user["E"] = E
         user["C"] = C
+        user["total_tpo"] = total_tpo
         delete user.metas.sequences
         reports.push(user)
     }
