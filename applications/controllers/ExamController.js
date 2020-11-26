@@ -1153,8 +1153,6 @@ exports.reportDetail = async (req,res) => {
             <th style="text-align:center">X</th>
             <th style="text-align:center">XI</th>
             <th style="text-align:center">XII</th>
-        </tr>
-        <tr>
             <th style="text-align:center">R</th>
             <th style="text-align:center">I</th>
             <th style="text-align:center">A</th>
