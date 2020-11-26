@@ -1959,7 +1959,7 @@ exports.printacara = async (req,res) => {
             <td>${dt.getHours().toString().padStart(2, '0')}:${dt.getMinutes().toString().padStart(2, '0')}:${dt.getSeconds().toString().padStart(2, '0')}</td>
         </tr>
         <tr>
-            <td>ASAL SEKOLAH</td>
+            <td>KELAS</td>
             <td>:</td>
             <td>${school.name}</td>
         </tr>
