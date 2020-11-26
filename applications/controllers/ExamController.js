@@ -1142,7 +1142,7 @@ exports.reportDetail = async (req,res) => {
             <th rowspan="3" style="text-align:center">TGL PEMERIKSAAN</th>
             <th rowspan="3" style="text-align:center">NO. HP/WA</th>
             <th rowspan="3" style="text-align:center">JURUSAN SEKARANG</th>
-            <th colspan="3" style="text-align:center">NILAI TERTINGGI</th>
+            <th colspan="2" style="text-align:center">NILAI TERTINGGI</th>
             <th rowspan="3" colspan="3" style="text-align:center">CITA-CITA</th>
             <th rowspan="3" colspan="3" style="text-align:center">PILIHAN JURUSAN</th>
             <th colspan="7" rowspan="2" style="text-align:center">HOLLAND</th>
@@ -1150,9 +1150,9 @@ exports.reportDetail = async (req,res) => {
             <th colspan="6" rowspan="2" style="text-align:center">URAIAN PENILAIAN ASPEK BERPIKIR</th>
         </tr>
         <tr>
-            <th colspan="2" style="text-align:center">X</th>
-            <th colspan="2" style="text-align:center">XI</th>
-            <th colspan="2" style="text-align:center">XII</th>
+            <th style="text-align:center">X</th>
+            <th style="text-align:center">XI</th>
+            <th style="text-align:center">XII</th>
         </tr>
         <tr>
             <th style="text-align:center">R</th>
