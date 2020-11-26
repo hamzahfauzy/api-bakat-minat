@@ -1018,11 +1018,9 @@ exports.reportDetail = async (req,res) => {
                 var selected = content.selected
                 var post = await Post.findById(selected)
                 if(quis <= 16 && post) subtest_value[""+subtest[quis]]+=parseInt(post.type_as)
+                if(quis <= 16 && post) total_tpo +=parseInt(post.type_as)
                 else if(quis >= 17 && post) nilai+= parseInt(post.type_as)
             }
-
-            if(quis <= 16)
-                total_tpo += nilai
 
             if(subtest_R.includes(q))
                 R += nilai
