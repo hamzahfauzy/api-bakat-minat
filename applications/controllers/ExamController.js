@@ -990,6 +990,8 @@ exports.reportDetail = async (req,res) => {
             rows += "<td></td>"
             rows += "<td></td>"
             rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
             rows += "</tr>"
             continue
         }
@@ -1136,6 +1138,7 @@ exports.reportDetail = async (req,res) => {
     html_response += "<br>"
     html_response += `<div>
     <table id="report" width="100%" border="1" cellspacing="0" cellpadding="5">
+        <thead>
         <tr style="background-color:#eaeaea;">
             <th rowspan="3" style="text-align:center">NO</th>
             <th rowspan="3" style="text-align:center">NIS</th>
@@ -1181,7 +1184,10 @@ exports.reportDetail = async (req,res) => {
             <th style="text-align:center" rowspan="2">LOGIKA VERBAL (4+2)</th>
             <th style="text-align:center" rowspan="2">LOGIKA ANGKA (5+6)</th>
         </tr>
+        </thead>
+        <tbody>
         ${rows}
+        </tbody>
     </table></div>
     
     `
