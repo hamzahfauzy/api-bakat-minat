@@ -914,7 +914,10 @@ exports.reportDetail = async (req,res) => {
     }
     for(var i=0;i<users.length;i++)
     {
-        var participant = users[i]
+
+        rows += "<tr><td>"+n+"</td>"
+
+        // var participant = users[i]
         var user = await User.findById(users[i]._id)
         if(!user) continue
         user = JSON.stringify(user)
@@ -922,8 +925,7 @@ exports.reportDetail = async (req,res) => {
         // delete user.metas.sequences
         delete user.metas.school
         // delete user.sequences
-        rows += "<tr>"
-        rows += "<td>"+(i+1)+"</td>"
+        
         rows += "<td>\'"+user.username+"</td>"
         rows += "<td>"+user.name+"</td>"
         rows += "<td>"+school.name+"</td>"
