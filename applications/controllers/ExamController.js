@@ -1135,18 +1135,19 @@ exports.reportDetail = async (req,res) => {
     <table id="report" width="100%" border="1" cellspacing="0" cellpadding="5">
         <tr style="background-color:#eaeaea;">
             <th rowspan="3" style="text-align:center">NO</th>
-            <th rowspan="3" style="text-align:center">NAMA</th>
+            <th rowspan="3" style="text-align:center">NIS</th>
+            <th rowspan="3" style="text-align:center">NAMA SISWA</th>
             <th rowspan="3" style="text-align:center">KELAS</th>
             <th rowspan="3" style="text-align:center">TEMPAT, TANGGAL LAHIR</th>
             <th rowspan="3" style="text-align:center">JENIS KELAMIN</th>
             <th rowspan="3" style="text-align:center">TGL PEMERIKSAAN</th>
             <th rowspan="3" style="text-align:center">NO. HP/WA</th>
             <th rowspan="3" style="text-align:center">JURUSAN SEKARANG</th>
-            <th rowspan="2" colspan="3" style="text-align:center">NILAI TERTINGGI</th>
+            <th rowspan="2" colspan="6" style="text-align:center">NILAI TERTINGGI</th>
             <th rowspan="3" colspan="3" style="text-align:center">CITA-CITA</th>
             <th rowspan="3" colspan="3" style="text-align:center">PILIHAN JURUSAN</th>
             <th colspan="7" rowspan="2" style="text-align:center">HOLLAND</th>
-            <th colspan="9" rowspan="2" style="text-align:center">HASIL TES POTENSI AKADEMIK (TPA)</th>
+            <th colspan="10" rowspan="2" style="text-align:center">HASIL TES POTENSI AKADEMIK (TPA)</th>
             <th colspan="6" rowspan="2" style="text-align:center">URAIAN PENILAIAN ASPEK BERPIKIR</th>
         </tr>
         <tr>
