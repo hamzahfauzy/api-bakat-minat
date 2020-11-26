@@ -1097,7 +1097,7 @@ exports.reportDetail = async (req,res) => {
         rows += "<td>"+subtest_value[6]+"</td>"
         rows += "<td>"+subtest_value[7]+"</td>"
         rows += "<td>"+subtest_value[8]+"</td>"
-        rows += "<td>"+total+"</td>"
+        rows += "<td>"+total_tpo+"</td>"
         rows += "<td>"+daya_tangkap+"</td>"
         rows += "<td>"+analisa_masalah+"</td>"
         rows += "<td>"+fleksibilitas_berpikir+"</td>"
