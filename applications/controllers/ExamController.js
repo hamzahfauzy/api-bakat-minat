@@ -1192,7 +1192,7 @@ exports.reportDetail = async (req,res) => {
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <script src="/api/uploads/tableToExcel.js" type="text/javascript"></script>
     <script type="text/javascript">
-        tableToExcel('report', '${school.name}')
+        // tableToExcel('report', '${school.name}')
     </script> 
     `
 
