@@ -926,7 +926,7 @@ exports.reportDetail = async (req,res) => {
         rows += "<td>\'"+user.username+"</td>"
         rows += "<td>"+user.name+"</td>"
         rows += "<td>"+school.name+"</td>"
-        rows += "<td>"+user.metas.tempat_tanggal_lahir+"</td>"
+        rows += "<td>"+user.metas.tempat_lahir+', '+user.metas.tanggal_lahir+"</td>"
         rows += "<td>"+user.metas.jenis_kelamin+"</td>"
         rows += "<td>"+d+"</td>"
         
@@ -1120,6 +1120,7 @@ exports.reportDetail = async (req,res) => {
         rows += "<td>"+subtest_value[7]+"</td>"
         rows += "<td>"+subtest_value[8]+"</td>"
         rows += "<td>"+total_tpo+"</td>"
+        rows += "<td></td>"
         rows += "<td>"+daya_tangkap+"</td>"
         rows += "<td>"+analisa_masalah+"</td>"
         rows += "<td>"+fleksibilitas_berpikir+"</td>"
