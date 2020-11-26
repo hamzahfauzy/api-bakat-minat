@@ -649,7 +649,7 @@ exports.beritaacara = async (req,res) => {
     ws.cell(3, 1)
       .string(`WAKTU : ${dt.getHours().toString().padStart(2, '0')}:${dt.getMinutes().toString().padStart(2, '0')}:${dt.getSeconds().toString().padStart(2, '0')}`)
     ws.cell(4, 1)
-      .string(`ASAL SEKOLAH : ${school.name}`)
+      .string(`KELAS : ${school.name}`)
 
     ws.cell(5, 1)
       .string("No")
