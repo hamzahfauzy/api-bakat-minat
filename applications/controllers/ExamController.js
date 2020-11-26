@@ -1155,7 +1155,7 @@ exports.reportDetail = async (req,res) => {
             <th rowspan="3" style="text-align:center">NO. HP/WA</th>
             <th rowspan="3" style="text-align:center">JURUSAN SEKARANG</th>
             <th colspan="4" style="text-align:center">NILAI TERTINGGI</th>
-            <th style="text-align:center">MATA PELAJARAN KESUKAAN</th>
+            <th rowspan="3" style="text-align:center">MATA PELAJARAN KESUKAAN</th>
             <th rowspan="3" colspan="3" style="text-align:center">CITA-CITA</th>
             <th rowspan="3" colspan="3" style="text-align:center">PILIHAN JURUSAN</th>
             <th colspan="7" style="text-align:center">HOLLAND</th>
@@ -1165,7 +1165,6 @@ exports.reportDetail = async (req,res) => {
         <tr>
             <th style="text-align:center" rowspan="2" colspan="2">X</th>
             <th style="text-align:center" rowspan="2" colspan="2">XI</th>
-            <th style="text-align:center" rowspan="2">XII</th>
             <th style="text-align:center" rowspan="2">R</th>
             <th style="text-align:center" rowspan="2">I</th>
             <th style="text-align:center" rowspan="2">A</th>
@@ -1195,7 +1194,11 @@ exports.reportDetail = async (req,res) => {
         ${rows}
         </tbody>
     </table></div>
-    
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="/api/uploads/tableToExcel.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        tableToExcel('report', '${school.name}')
+    </script> 
     `
 
     res.type("text/html");
