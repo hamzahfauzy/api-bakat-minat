@@ -922,10 +922,10 @@ exports.reportDetail = async (req,res) => {
         // delete user.metas.sequences
         delete user.metas.school
         // delete user.sequences
+        rows += "<td>"+(i+1)+"</td>"
         rows += "<td>"+user.name+"</td>"
         rows += "<td>\'"+user.username+"</td>"
-        // rows += "<td>"+school.name+"</td>"
-        rows += "<td></td>"
+        rows += "<td>"+school.name+"</td>"
         rows += "<td>"+user.metas.tempat_tanggal_lahir+"</td>"
         rows += "<td>"+user.metas.jenis_kelamin+"</td>"
         rows += "<td>"+d+"</td>"
@@ -1134,7 +1134,6 @@ exports.reportDetail = async (req,res) => {
         <tr style="background-color:#eaeaea;">
             <th rowspan="3" style="text-align:center">NO</th>
             <th rowspan="3" style="text-align:center">NAMA</th>
-            <th rowspan="3" style="text-align:center">NISN</th>
             <th rowspan="3" style="text-align:center">KELAS</th>
             <th rowspan="3" style="text-align:center">TEMPAT, TANGGAL LAHIR</th>
             <th rowspan="3" style="text-align:center">JENIS KELAMIN</th>
