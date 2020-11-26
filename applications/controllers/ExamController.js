@@ -929,7 +929,7 @@ exports.reportDetail = async (req,res) => {
         rows += "<td>"+user.metas.jenis_kelamin+"</td>"
         rows += "<td>"+d+"</td>"
         rows += "<td>"+user.metas.hp+"</td>"
-        if(user.hasOwnProperty('sequences')
+        if(user.hasOwnProperty('sequences'))
         {
             rows += "<td>"+user.metas.academyc_sma.jurusan+"</td>"
             rows += "<td>"+user.metas.nilai_tertinggi_x.mata_pelajaran+"</td>"
