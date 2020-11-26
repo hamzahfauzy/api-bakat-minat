@@ -1134,6 +1134,7 @@ exports.reportDetail = async (req,res) => {
         rows += "<td>"+logika_verbal+"</td>"
         rows += "<td>"+logika_angka+"</td>"
         rows += "</tr>"
+        delete user.metas.sequences
     }
 
     var html_response = "<title>LAPORAN MINAT BAKAT "+school.name+"</title>"
