@@ -883,6 +883,89 @@ exports.report = async (req,res) => {
 }
 
 exports.reportDetail = async (req,res) => {
+    var exam = await Exam.findById(req.params.exam_id)
+    var _exam = JSON.stringify(exam)
+        _exam = JSON.parse(_exam)
+    var users = _exam.participants
+    var reports = []
+    for(var i=0;i<users.length;i++)
+    {
+        var participant = users[i]
+        var user = await User.findById(users[i]._id)
+        if(!user) continue
+        user = JSON.stringify(user)
+        user = JSON.parse(user)
+        // delete user.metas.sequences
+        delete user.metas.school
+        // delete user.sequences
+        var sequences = user.metas.sequences
+        if(typeof sequences === 'undefined' || !sequences.length){
+            user.metas.NISN = participant.nis
+            reports.push(user)
+            continue
+        } 
+
+        var hasil_arr = []
+        var subtest_R = [2,14,26]
+        var subtest_I = [4,16,28]
+        var subtest_A = [6,18,30]
+        var subtest_S = [8,20,32]
+        var subtest_E = [10,22,34]
+        var subtest_C = [12,24,36]
+        var R = 0, I = 0, A = 0, S = 0, E = 0, C = 0
+        var total_tpo = 0
+        for (var j = 0; j < sequences.length; j++) 
+        {
+            var quis = j+1
+            if(quis%2 != 0) continue;
+            var q = quis-16
+            var sequence = sequences[j].contents
+            var nilai = 0
+            for(var k = 0; k < sequence.length; k++)
+            {
+                var content = sequence[k]
+                // if(content.childs.length == 0) continue;
+                if(typeof content.selected === 'undefined') continue
+                var selected = content.selected
+                var post = await Post.findById(selected)
+                if(post) nilai+= parseInt(post.type_as)
+            }
+
+            if(quis <= 16)
+                total_tpo += nilai
+
+            if(subtest_R.includes(q))
+                R += nilai
+            if(subtest_I.includes(q))
+                I += nilai
+            if(subtest_A.includes(q))
+                A += nilai
+            if(subtest_S.includes(q))
+                S += nilai
+            if(subtest_E.includes(q))
+                E += nilai
+            if(subtest_C.includes(q))
+                C += nilai
+        }
+        
+        user["R"] = R
+        user["I"] = I
+        user["A"] = A
+        user["S"] = S
+        user["E"] = E
+        user["C"] = C
+        user["total_tpo"] = total_tpo
+        delete user.metas.sequences
+        reports.push(user)
+    }
+    _exam.participants = reports
+    res.json({
+        message: 'Exam detail loading..',
+        data: _exam
+    });
+}
+
+exports.reportDetail3 = async (req,res) => {
     // Create a new instance of a Workbook class
     
     var exam = await Exam.findById(req.params.exam_id)
@@ -907,7 +990,7 @@ exports.reportDetail = async (req,res) => {
         var d = new Date(Date.now()).toLocaleString().split(",")[0];
         rows += "<td>"+user.name+"</td>"
         rows += "<td>\'"+user.username+"</td>"
-        rows += "<td></td>"
+        rows += "<td>"+school.name+"</td>"
         rows += "<td>"+user.metas.tempat_tanggal_lahir+"</td>"
         rows += "<td>"+user.metas.jenis_kelamin+"</td>"
         rows += "<td>"+d+"</td>"
@@ -1134,7 +1217,6 @@ exports.reportDetail = async (req,res) => {
         rows += "<td>"+logika_verbal+"</td>"
         rows += "<td>"+logika_angka+"</td>"
         rows += "</tr>"
-        delete user.metas.sequences
     }
 
     var html_response = "<title>LAPORAN MINAT BAKAT "+school.name+"</title>"
@@ -1192,7 +1274,7 @@ exports.reportDetail = async (req,res) => {
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <script src="/api/uploads/tableToExcel.js" type="text/javascript"></script>
     <script type="text/javascript">
-        // tableToExcel('report', '${school.name}')
+        tableToExcel('report', '${school.name}')
     </script> 
     `
 
