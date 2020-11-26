@@ -1143,40 +1143,40 @@ exports.reportDetail = async (req,res) => {
             <th rowspan="3" style="text-align:center">TGL PEMERIKSAAN</th>
             <th rowspan="3" style="text-align:center">NO. HP/WA</th>
             <th rowspan="3" style="text-align:center">JURUSAN SEKARANG</th>
-            <th rowspan="2" colspan="6" style="text-align:center">NILAI TERTINGGI</th>
+            <th colspan="6" style="text-align:center">NILAI TERTINGGI</th>
             <th rowspan="3" colspan="3" style="text-align:center">CITA-CITA</th>
             <th rowspan="3" colspan="3" style="text-align:center">PILIHAN JURUSAN</th>
-            <th colspan="7" rowspan="2" style="text-align:center">HOLLAND</th>
-            <th colspan="10" rowspan="2" style="text-align:center">HASIL TES POTENSI AKADEMIK (TPA)</th>
-            <th colspan="6" rowspan="2" style="text-align:center">URAIAN PENILAIAN ASPEK BERPIKIR</th>
+            <th colspan="7" style="text-align:center">HOLLAND</th>
+            <th colspan="10" style="text-align:center">HASIL TES POTENSI AKADEMIK (TPA)</th>
+            <th colspan="6" style="text-align:center">URAIAN PENILAIAN ASPEK BERPIKIR</th>
         </tr>
         <tr>
-            <th style="text-align:center" colspan="2">X</th>
-            <th style="text-align:center" colspan="2">XI</th>
-            <th style="text-align:center" colspan="2">XII</th>
-            <th style="text-align:center">R</th>
-            <th style="text-align:center">I</th>
-            <th style="text-align:center">A</th>
-            <th style="text-align:center">S</th>
-            <th style="text-align:center">E</th>
-            <th style="text-align:center">C</th>
-            <th style="text-align:center">HASIL</th>
-            <th style="text-align:center">1</th>
-            <th style="text-align:center">2</th>
-            <th style="text-align:center">3</th>
-            <th style="text-align:center">4</th>
-            <th style="text-align:center">5</th>
-            <th style="text-align:center">6</th>
-            <th style="text-align:center">7</th>
-            <th style="text-align:center">8</th>
-            <th style="text-align:center">TOTAL</th>
-            <th style="text-align:center">POTENSI AKADEMIK</th>
-            <th style="text-align:center">DAYA TANGKAP (1)</th>
-            <th style="text-align:center">ANALISA MASALAH (3+8)</th>
-            <th style="text-align:center">FLEKSIBILITAS BERPIKIR (6+8+3)</th>
-            <th style="text-align:center">PEMECAHAN MASALAH (5)</th>
-            <th style="text-align:center">LOGIKA VERBAL (4+2)</th>
-            <th style="text-align:center">LOGIKA ANGKA (5+6)</th>
+            <th style="text-align:center" rowspan="2" colspan="2">X</th>
+            <th style="text-align:center" rowspan="2" colspan="2">XI</th>
+            <th style="text-align:center" rowspan="2" colspan="2">XII</th>
+            <th style="text-align:center" rowspan="2">R</th>
+            <th style="text-align:center" rowspan="2">I</th>
+            <th style="text-align:center" rowspan="2">A</th>
+            <th style="text-align:center" rowspan="2">S</th>
+            <th style="text-align:center" rowspan="2">E</th>
+            <th style="text-align:center" rowspan="2">C</th>
+            <th style="text-align:center" rowspan="2">HASIL</th>
+            <th style="text-align:center" rowspan="2">1</th>
+            <th style="text-align:center" rowspan="2">2</th>
+            <th style="text-align:center" rowspan="2">3</th>
+            <th style="text-align:center" rowspan="2">4</th>
+            <th style="text-align:center" rowspan="2">5</th>
+            <th style="text-align:center" rowspan="2">6</th>
+            <th style="text-align:center" rowspan="2">7</th>
+            <th style="text-align:center" rowspan="2">8</th>
+            <th style="text-align:center" rowspan="2">TOTAL</th>
+            <th style="text-align:center" rowspan="2">POTENSI AKADEMIK</th>
+            <th style="text-align:center" rowspan="2">DAYA TANGKAP (1)</th>
+            <th style="text-align:center" rowspan="2">ANALISA MASALAH (3+8)</th>
+            <th style="text-align:center" rowspan="2">FLEKSIBILITAS BERPIKIR (6+8+3)</th>
+            <th style="text-align:center" rowspan="2">PEMECAHAN MASALAH (5)</th>
+            <th style="text-align:center" rowspan="2">LOGIKA VERBAL (4+2)</th>
+            <th style="text-align:center" rowspan="2">LOGIKA ANGKA (5+6)</th>
         </tr>
         ${rows}
     </table></div>
