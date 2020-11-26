@@ -1137,6 +1137,7 @@ exports.reportDetail = async (req,res) => {
             <th rowspan="3" style="text-align:center">KELAS</th>
             <th rowspan="3" style="text-align:center">TEMPAT, TANGGAL LAHIR</th>
             <th rowspan="3" style="text-align:center">JENIS KELAMIN</th>
+            <th rowspan="3" style="text-align:center">TGL PEMERIKSAAN</th>
             <th rowspan="3" style="text-align:center">NO. HP/WA</th>
             <th rowspan="3" style="text-align:center">JURUSAN SEKARANG</th>
             <th colspan="3" style="text-align:center">NILAI TERTINGGI</th>
