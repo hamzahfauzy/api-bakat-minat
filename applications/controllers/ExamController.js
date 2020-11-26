@@ -907,7 +907,7 @@ exports.reportDetail = async (req,res) => {
         var d = new Date(Date.now()).toLocaleString().split(",")[0];
         rows += "<td>"+user.name+"</td>"
         rows += "<td>\'"+user.username+"</td>"
-        rows += "<td>\'"+user.metas.school.name+"</td>"
+        rows += "<td>\'"+user.metas.school?user.metas.school.name:''+"</td>"
         rows += "<td>\'"+user.metas.tempat_tanggal_lahir+"</td>"
         rows += "<td>\'"+user.metas.jenis_kelamin+"</td>"
         rows += "<td>\'"+d+"</td>"
