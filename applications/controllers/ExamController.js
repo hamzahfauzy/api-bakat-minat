@@ -970,7 +970,7 @@ exports.reportDetail = async (req,res) => {
             continue
         }
 
-        // var hasil_arr = []
+        var hasil_arr = []
         var subtest_R = [2,14,26]
         var subtest_I = [4,16,28]
         var subtest_A = [6,18,30]
@@ -1023,6 +1023,21 @@ exports.reportDetail = async (req,res) => {
         // user["total_tpo"] = total_tpo
         delete user.metas.sequences
         // reports.push(user)
+
+        hasil_arr.push({"name":"REALISTIC","nilai":R})
+        hasil_arr.push({"name":"INVESTIGATIVE","nilai":I})
+        hasil_arr.push({"name":"ARTISTIC","nilai":A})
+        hasil_arr.push({"name":"SOCIAL","nilai":S})
+        hasil_arr.push({"name":"ENTERPRENUER","nilai":E})
+        hasil_arr.push({"name":"CONVENTIONAL","nilai":C})
+
+        hasil_arr = hasil_arr.sort((a,b) => (a.nilai < b.nilai) ? 1 : ((b.nilai < a.nilai) ? -1 : 0))
+        hasil_arr = hasil_arr.slice(0,3)
+        var hasil = ""
+        hasil_arr.forEach((val,idx) => {
+            hasil += val.name
+            if(idx < 2) hasil += " - "
+        })
 
         var daya_tangkap = subtest_value[1]
         var analisa_masalah = (subtest_value[3]+subtest_value[8])
