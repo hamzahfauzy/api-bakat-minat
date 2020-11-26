@@ -888,6 +888,29 @@ exports.reportDetail = async (req,res) => {
         _exam = JSON.parse(_exam)
     var users = _exam.participants
     var reports = []
+    var rows = ""
+    var d = new Date(Date.now()).toLocaleString().split(",")[0];
+    var subtest = {
+        '2':1,
+        '4':2,
+        '6':3,
+        '8':4,
+        '10':5,
+        '12':6,
+        '14':7,
+        '16':8,
+    }
+
+    var subtest_value = {
+        '1':0,
+        '2':0,
+        '3':0,
+        '4':0,
+        '5':0,
+        '6':0,
+        '7':0,
+        '8':0,
+    }
     for(var i=0;i<users.length;i++)
     {
         var participant = users[i]
@@ -898,14 +921,55 @@ exports.reportDetail = async (req,res) => {
         // delete user.metas.sequences
         delete user.metas.school
         // delete user.sequences
+        rows += "<td>"+user.name+"</td>"
+        rows += "<td>\'"+user.username+"</td>"
+        rows += "<td>"+school.name+"</td>"
+        rows += "<td>"+user.metas.tempat_tanggal_lahir+"</td>"
+        rows += "<td>"+user.metas.jenis_kelamin+"</td>"
+        rows += "<td>"+d+"</td>"
+        rows += "<td>"+user.metas.hp+"</td>"
+        rows += "<td>"+user.metas.academyc_sma.jurusan+"</td>"
+        rows += "<td>"+user.metas.nilai_tertinggi_x.mata_pelajaran+"</td>"
+        rows += "<td>"+user.metas.nilai_tertinggi_x.nilai+"</td>"
+        rows += "<td>"+user.metas.nilai_tertinggi_xi.mata_pelajaran+"</td>"
+        rows += "<td>"+user.metas.nilai_tertinggi_xi.nilai+"</td>"
+        rows += "<td>"+user.metas.nilai_tertinggi_xii.mata_pelajaran+"</td>"
+        rows += "<td>"+user.metas.nilai_tertinggi_xii.nilai+"</td>"
+        rows += "<td>"+user.metas.cita_cita[0].value+"</td>"
+        rows += "<td>"+user.metas.cita_cita[1].value+"</td>"
+        rows += "<td>"+user.metas.cita_cita[2].value+"</td>"
+        rows += "<td>"+user.metas.jurusan[0].value+"</td>"
+        rows += "<td>"+user.metas.jurusan[1].value+"</td>"
+        rows += "<td>"+user.metas.jurusan[2].value+"</td>"
         var sequences = user.metas.sequences
-        if(typeof sequences === 'undefined' || !sequences.length){
-            user.metas.NISN = participant.nis
-            reports.push(user)
+        if(typeof sequences === 'undefined'){
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "</tr>"
             continue
-        } 
+        }
 
-        var hasil_arr = []
+        // var hasil_arr = []
         var subtest_R = [2,14,26]
         var subtest_I = [4,16,28]
         var subtest_A = [6,18,30]
@@ -928,7 +992,8 @@ exports.reportDetail = async (req,res) => {
                 if(typeof content.selected === 'undefined') continue
                 var selected = content.selected
                 var post = await Post.findById(selected)
-                if(post) nilai+= parseInt(post.type_as)
+                if(quis <= 16 && post) subtest_value[""+subtest[quis]]+=parseInt(post.type_as)
+                else if(quis >= 17 && post) nilai+= parseInt(post.type_as)
             }
 
             if(quis <= 16)
@@ -948,21 +1013,145 @@ exports.reportDetail = async (req,res) => {
                 C += nilai
         }
         
-        user["R"] = R
-        user["I"] = I
-        user["A"] = A
-        user["S"] = S
-        user["E"] = E
-        user["C"] = C
-        user["total_tpo"] = total_tpo
+        // user["R"] = R
+        // user["I"] = I
+        // user["A"] = A
+        // user["S"] = S
+        // user["E"] = E
+        // user["C"] = C
+        // user["total_tpo"] = total_tpo
         delete user.metas.sequences
-        reports.push(user)
+        // reports.push(user)
+
+        var daya_tangkap = subtest_value[1]
+        var analisa_masalah = (subtest_value[3]+subtest_value[8])
+        var fleksibilitas_berpikir = (subtest_value[6]+subtest_value[8]+subtest_value[3])
+        var pemecahan_masalah = (subtest_value[5])
+        var logika_verbal = (subtest_value[4]+subtest_value[2])
+        var logika_angka = (subtest_value[5]+subtest_value[6])
+
+        if(daya_tangkap <= 4) daya_tangkap = 1
+        else if(daya_tangkap >= 5 && daya_tangkap <= 8) daya_tangkap = 2
+        else if(daya_tangkap >= 9 && daya_tangkap <= 12) daya_tangkap = 3
+        else if(daya_tangkap >= 13 && daya_tangkap <= 16) daya_tangkap = 4
+        else if(daya_tangkap >= 14) daya_tangkap = 5
+
+        if(analisa_masalah <= 8) analisa_masalah = 1
+        else if(analisa_masalah >= 9 && analisa_masalah <= 16) analisa_masalah = 2
+        else if(analisa_masalah >= 17 && analisa_masalah <= 24) analisa_masalah = 3
+        else if(analisa_masalah >= 25 && analisa_masalah <= 32) analisa_masalah = 4
+        else if(analisa_masalah >= 33) analisa_masalah = 5
+
+        if(fleksibilitas_berpikir <= 12) fleksibilitas_berpikir = 1
+        else if(fleksibilitas_berpikir >= 13 && fleksibilitas_berpikir <= 24) fleksibilitas_berpikir = 2
+        else if(fleksibilitas_berpikir >= 25 && fleksibilitas_berpikir <= 36) fleksibilitas_berpikir = 3
+        else if(fleksibilitas_berpikir >= 37 && fleksibilitas_berpikir <= 48) fleksibilitas_berpikir = 4
+        else if(fleksibilitas_berpikir >= 49) fleksibilitas_berpikir = 5
+
+        if(pemecahan_masalah <= 4) pemecahan_masalah = 1
+        else if(pemecahan_masalah >= 5 && pemecahan_masalah <= 8) pemecahan_masalah = 2
+        else if(pemecahan_masalah >= 9 && pemecahan_masalah <= 12) pemecahan_masalah = 3
+        else if(pemecahan_masalah >= 13 && pemecahan_masalah <= 16) pemecahan_masalah = 4
+        else if(pemecahan_masalah >= 14) pemecahan_masalah = 5
+
+        if(logika_verbal <= 8) logika_verbal = 1
+        else if(logika_verbal >= 9 && logika_verbal <= 16) logika_verbal = 2
+        else if(logika_verbal >= 17 && logika_verbal <= 24) logika_verbal = 3
+        else if(logika_verbal >= 25 && logika_verbal <= 32) logika_verbal = 4
+        else if(logika_verbal >= 33) logika_verbal = 5
+
+        if(logika_angka <= 8) logika_angka = 1
+        else if(logika_angka >= 9 && logika_angka <= 16) logika_angka = 2
+        else if(logika_angka >= 17 && logika_angka <= 24) logika_angka = 3
+        else if(logika_angka >= 25 && logika_angka <= 32) logika_angka = 4
+        else if(logika_angka >= 33) logika_angka = 5
+
+        rows += "<td>"+R+"</td>"
+        rows += "<td>"+I+"</td>"
+        rows += "<td>"+A+"</td>"
+        rows += "<td>"+S+"</td>"
+        rows += "<td>"+E+"</td>"
+        rows += "<td>"+C+"</td>"
+        rows += "<td>"+hasil+"</td>"
+        rows += "<td>"+subtest_value[1]+"</td>"
+        rows += "<td>"+subtest_value[2]+"</td>"
+        rows += "<td>"+subtest_value[3]+"</td>"
+        rows += "<td>"+subtest_value[4]+"</td>"
+        rows += "<td>"+subtest_value[5]+"</td>"
+        rows += "<td>"+subtest_value[6]+"</td>"
+        rows += "<td>"+subtest_value[7]+"</td>"
+        rows += "<td>"+subtest_value[8]+"</td>"
+        rows += "<td>"+total+"</td>"
+        rows += "<td>"+daya_tangkap+"</td>"
+        rows += "<td>"+analisa_masalah+"</td>"
+        rows += "<td>"+fleksibilitas_berpikir+"</td>"
+        rows += "<td>"+pemecahan_masalah+"</td>"
+        rows += "<td>"+logika_verbal+"</td>"
+        rows += "<td>"+logika_angka+"</td>"
+        rows += "</tr>"
     }
-    _exam.participants = reports
-    res.json({
-        message: 'Exam detail loading..',
-        data: _exam
-    });
+    var html_response = "<title>LAPORAN MINAT BAKAT "+school.name+"</title>"
+
+    html_response += "<br>"
+    html_response += `<div>
+    <table id="report" width="100%" border="1" cellspacing="0" cellpadding="5">
+        <tr style="background-color:#eaeaea;">
+            <th rowspan="2" style="text-align:center">NO</th>
+            <th rowspan="2" style="text-align:center">NAMA</th>
+            <th rowspan="2" style="text-align:center">NISN</th>
+            <th rowspan="2" style="text-align:center">KELAS</th>
+            <th rowspan="2" style="text-align:center">TEMPAT, TANGGAL LAHIR</th>
+            <th rowspan="2" style="text-align:center">JENIS KELAMIN</th>
+            <th rowspan="2" style="text-align:center">NO. HP/WA</th>
+            <th rowspan="2" style="text-align:center">JURUSAN SEKARANG</th>
+            <th colspan="3" style="text-align:center">NILAI TERTINGGI</th>
+            <th rowspan="2" colspan="3" style="text-align:center">CITA-CITA</th>
+            <th rowspan="2" colspan="3" style="text-align:center">PILIHAN JURUSAN</th>
+            <th colspan="7" style="text-align:center">HOLLAND</th>
+            <th colspan="9" style="text-align:center">HASIL TES POTENSI AKADEMIK (TPA)</th>
+            <th colspan="6" style="text-align:center">URAIAN PENILAIAN ASPEK BERPIKIR</th>
+        </tr>
+        <tr>
+            <th colspan="2" style="text-align:center">X</th>
+            <th colspan="2" style="text-align:center">XI</th>
+            <th colspan="2" style="text-align:center">XII</th>
+        </tr>
+        <tr>
+            <th style="text-align:center">R</th>
+            <th style="text-align:center">I</th>
+            <th style="text-align:center">A</th>
+            <th style="text-align:center">S</th>
+            <th style="text-align:center">E</th>
+            <th style="text-align:center">C</th>
+            <th style="text-align:center">HASIL</th>
+            <th style="text-align:center">1</th>
+            <th style="text-align:center">2</th>
+            <th style="text-align:center">3</th>
+            <th style="text-align:center">4</th>
+            <th style="text-align:center">5</th>
+            <th style="text-align:center">6</th>
+            <th style="text-align:center">7</th>
+            <th style="text-align:center">8</th>
+            <th style="text-align:center">TOTAL</th>
+            <th style="text-align:center">DAYA TANGKAP (1)</th>
+            <th style="text-align:center">ANALISA MASALAH (3+8)</th>
+            <th style="text-align:center">FLEKSIBILITAS BERPIKIR (6+8+3)</th>
+            <th style="text-align:center">PEMECAHAN MASALAH (5)</th>
+            <th style="text-align:center">LOGIKA VERBAL (4+2)</th>
+            <th style="text-align:center">LOGIKA ANGKA (5+6)</th>
+        </tr>
+        ${rows}
+    </table></div>
+    
+    `
+
+    res.type("text/html");
+    res.send(html_response);
+    // _exam.participants = reports
+    // res.json({
+    //     message: 'Exam detail loading..',
+    //     data: _exam
+    // });
 }
 
 exports.reportDetail3 = async (req,res) => {
@@ -974,6 +1163,7 @@ exports.reportDetail3 = async (req,res) => {
     users = JSON.stringify(users)
     users = JSON.parse(users)
     var rows = ""
+    var d = new Date(Date.now()).toLocaleString().split(",")[0];
     for(var i=0;i<users.length;i++)
     {
         var n = i+1;
@@ -987,7 +1177,7 @@ exports.reportDetail3 = async (req,res) => {
         // delete user.metas.sequences
         delete user.metas.school
         // delete user.sequences
-        var d = new Date(Date.now()).toLocaleString().split(",")[0];
+        
         rows += "<td>"+user.name+"</td>"
         rows += "<td>\'"+user.username+"</td>"
         rows += "<td>"+school.name+"</td>"
@@ -1035,6 +1225,7 @@ exports.reportDetail3 = async (req,res) => {
             rows += "</tr>"
             continue
         } 
+        
         var subtest = {
             '2':1,
             '4':2,
