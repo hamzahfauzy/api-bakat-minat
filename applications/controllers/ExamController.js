@@ -902,12 +902,12 @@ exports.reportDetail = async (req,res) => {
         user = JSON.stringify(user)
         user = JSON.parse(user)
         // delete user.metas.sequences
-        delete user.metas.school
+        delete user.metas.school.students
         // delete user.sequences
         var d = new Date(Date.now()).toLocaleString().split(",")[0];
         rows += "<td>"+user.name+"</td>"
         rows += "<td>\'"+user.username+"</td>"
-        rows += "<td>\'"+user.metas.school?user.metas.school.name:''+"</td>"
+        rows += "<td>\'"+user.metas.school.name+"</td>"
         rows += "<td>\'"+user.metas.tempat_tanggal_lahir+"</td>"
         rows += "<td>\'"+user.metas.jenis_kelamin+"</td>"
         rows += "<td>\'"+d+"</td>"
