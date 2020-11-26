@@ -977,18 +977,36 @@ exports.reportDetail = async (req,res) => {
         else
         {
             rows += "<td>"+user.metas.hp+"</td>"
-            rows += "<td>"+(typeof user.metas.academyc_sma === 'undefined'?'':user.metas.academyc_sma.jurusan)+"</td>"
-            rows += "<td>"+user.metas.nilai_tertinggi_x.mata_pelajaran+"</td>"
-            rows += "<td>"+user.metas.nilai_tertinggi_x.nilai+"</td>"
-            rows += "<td>"+user.metas.nilai_tertinggi_xi.mata_pelajaran+"</td>"
-            rows += "<td>"+user.metas.nilai_tertinggi_xi.nilai+"</td>"
-            rows += "<td>"+user.metas.nilai_tertinggi_xii.mata_pelajaran+"</td>"
-            rows += "<td>"+user.metas.cita_cita[0].value+"</td>"
-            rows += "<td>"+user.metas.cita_cita[1].value+"</td>"
-            rows += "<td>"+user.metas.cita_cita[2].value+"</td>"
-            rows += "<td>"+user.metas.jurusan[0].value+"</td>"
-            rows += "<td>"+user.metas.jurusan[1].value+"</td>"
-            rows += "<td>"+user.metas.jurusan[2].value+"</td>"
+            if(typeof user.metas.academyc_sma === 'undefined')
+            {
+                rows += "<td></td>"
+                rows += "<td></td>"
+                rows += "<td></td>"
+                rows += "<td></td>"
+                rows += "<td></td>"
+                rows += "<td></td>"
+                rows += "<td></td>"
+                rows += "<td></td>"
+                rows += "<td></td>"
+                rows += "<td></td>"
+                rows += "<td></td>"
+                rows += "<td></td>"
+            }
+            else
+            {
+                rows += "<td>"+user.metas.academyc_sma.jurusan+"</td>"
+                rows += "<td>"+user.metas.nilai_tertinggi_x.mata_pelajaran+"</td>"
+                rows += "<td>"+user.metas.nilai_tertinggi_x.nilai+"</td>"
+                rows += "<td>"+user.metas.nilai_tertinggi_xi.mata_pelajaran+"</td>"
+                rows += "<td>"+user.metas.nilai_tertinggi_xi.nilai+"</td>"
+                rows += "<td>"+user.metas.nilai_tertinggi_xii.mata_pelajaran+"</td>"
+                rows += "<td>"+user.metas.cita_cita[0].value+"</td>"
+                rows += "<td>"+user.metas.cita_cita[1].value+"</td>"
+                rows += "<td>"+user.metas.cita_cita[2].value+"</td>"
+                rows += "<td>"+user.metas.jurusan[0].value+"</td>"
+                rows += "<td>"+user.metas.jurusan[1].value+"</td>"
+                rows += "<td>"+user.metas.jurusan[2].value+"</td>"
+            }
         }
 
         var hasil_arr = []
