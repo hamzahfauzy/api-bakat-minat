@@ -1150,9 +1150,9 @@ exports.reportDetail = async (req,res) => {
             <th colspan="6" rowspan="2" style="text-align:center">URAIAN PENILAIAN ASPEK BERPIKIR</th>
         </tr>
         <tr>
-            <th style="text-align:center">X</th>
-            <th style="text-align:center">XI</th>
-            <th style="text-align:center">XII</th>
+            <th style="text-align:center" colspan="2">X</th>
+            <th style="text-align:center" colspan="2">XI</th>
+            <th style="text-align:center" colspan="2">XII</th>
             <th style="text-align:center">R</th>
             <th style="text-align:center">I</th>
             <th style="text-align:center">A</th>
@@ -1169,6 +1169,7 @@ exports.reportDetail = async (req,res) => {
             <th style="text-align:center">7</th>
             <th style="text-align:center">8</th>
             <th style="text-align:center">TOTAL</th>
+            <th style="text-align:center">POTENSI AKADEMIK</th>
             <th style="text-align:center">DAYA TANGKAP (1)</th>
             <th style="text-align:center">ANALISA MASALAH (3+8)</th>
             <th style="text-align:center">FLEKSIBILITAS BERPIKIR (6+8+3)</th>
