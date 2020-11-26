@@ -1157,7 +1157,7 @@ exports.reportDetail = async (req,res) => {
             <th colspan="10" style="text-align:center">HASIL TES POTENSI AKADEMIK (TPA)</th>
             <th colspan="6" style="text-align:center">URAIAN PENILAIAN ASPEK BERPIKIR</th>
         </tr>
-        <tr>
+        <tr style="background-color:#eaeaea;">
             <th style="text-align:center" rowspan="2" colspan="2">X</th>
             <th style="text-align:center" rowspan="2" colspan="2">XI</th>
             <th style="text-align:center" rowspan="2">R</th>
