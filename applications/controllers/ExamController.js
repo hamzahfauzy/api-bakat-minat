@@ -958,7 +958,6 @@ exports.reportDetail = async (req,res) => {
             rows += "<td>"+user.metas.nilai_tertinggi_xi.mata_pelajaran+"</td>"
             rows += "<td>"+user.metas.nilai_tertinggi_xi.nilai+"</td>"
             rows += "<td>"+user.metas.nilai_tertinggi_xii.mata_pelajaran+"</td>"
-            rows += "<td>"+user.metas.nilai_tertinggi_xii.nilai+"</td>"
             rows += "<td>"+user.metas.cita_cita[0].value+"</td>"
             rows += "<td>"+user.metas.cita_cita[1].value+"</td>"
             rows += "<td>"+user.metas.cita_cita[2].value+"</td>"
@@ -968,7 +967,6 @@ exports.reportDetail = async (req,res) => {
         }
 
         if(typeof sequences === 'undefined'){
-            rows += "<td></td>"
             rows += "<td></td>"
             rows += "<td></td>"
             rows += "<td></td>"
@@ -1108,6 +1106,13 @@ exports.reportDetail = async (req,res) => {
         else if(logika_angka >= 25 && logika_angka <= 32) logika_angka = 4
         else if(logika_angka >= 33) logika_angka = 5
 
+        var hasil_tpo = ""
+        if(total_tpo>=100) hasil_tpo = "Sangat Tinggi"
+        else if(total_tpo>=80&&total_tpo<=99) hasil_tpo = "Tinggi"
+        else if(total_tpo>=60&&total_tpo<=79) hasil_tpo = "Sedang"
+        else if(total_tpo>=40&&total_tpo<=59) hasil_tpo = "Kurang"
+        else if(total_tpo<=39) hasil_tpo = "Sangat Kurang"
+
         rows += "<td>"+R+"</td>"
         rows += "<td>"+I+"</td>"
         rows += "<td>"+A+"</td>"
@@ -1124,7 +1129,7 @@ exports.reportDetail = async (req,res) => {
         rows += "<td>"+subtest_value[7]+"</td>"
         rows += "<td>"+subtest_value[8]+"</td>"
         rows += "<td>"+total_tpo+"</td>"
-        rows += "<td></td>"
+        rows += "<td>"+hasil_tpo+"</td>"
         rows += "<td>"+daya_tangkap+"</td>"
         rows += "<td>"+analisa_masalah+"</td>"
         rows += "<td>"+fleksibilitas_berpikir+"</td>"
@@ -1149,7 +1154,8 @@ exports.reportDetail = async (req,res) => {
             <th rowspan="3" style="text-align:center">TGL PEMERIKSAAN</th>
             <th rowspan="3" style="text-align:center">NO. HP/WA</th>
             <th rowspan="3" style="text-align:center">JURUSAN SEKARANG</th>
-            <th colspan="6" style="text-align:center">NILAI TERTINGGI</th>
+            <th colspan="5" style="text-align:center">NILAI TERTINGGI</th>
+            <th style="text-align:center">MATA PELAJARAN KESUKAAN</th>
             <th rowspan="3" colspan="3" style="text-align:center">CITA-CITA</th>
             <th rowspan="3" colspan="3" style="text-align:center">PILIHAN JURUSAN</th>
             <th colspan="7" style="text-align:center">HOLLAND</th>
@@ -1159,7 +1165,7 @@ exports.reportDetail = async (req,res) => {
         <tr>
             <th style="text-align:center" rowspan="2" colspan="2">X</th>
             <th style="text-align:center" rowspan="2" colspan="2">XI</th>
-            <th style="text-align:center" rowspan="2" colspan="2">XII</th>
+            <th style="text-align:center" rowspan="2">XII</th>
             <th style="text-align:center" rowspan="2">R</th>
             <th style="text-align:center" rowspan="2">I</th>
             <th style="text-align:center" rowspan="2">A</th>
@@ -1238,7 +1244,7 @@ exports.reportDetail3 = async (req,res) => {
         rows += "<td>"+user.metas.nilai_tertinggi_xi.mata_pelajaran+"</td>"
         rows += "<td>"+user.metas.nilai_tertinggi_xi.nilai+"</td>"
         rows += "<td>"+user.metas.nilai_tertinggi_xii.mata_pelajaran+"</td>"
-        rows += "<td>"+user.metas.nilai_tertinggi_xii.nilai+"</td>"
+
         rows += "<td>"+user.metas.cita_cita[0].value+"</td>"
         rows += "<td>"+user.metas.cita_cita[1].value+"</td>"
         rows += "<td>"+user.metas.cita_cita[2].value+"</td>"
