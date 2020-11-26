@@ -887,7 +887,8 @@ exports.reportDetail = async (req,res) => {
     var _exam = JSON.stringify(exam)
         _exam = JSON.parse(_exam)
     var users = _exam.participants
-    var reports = []
+    var school = await School.findById(_exam.school_id)
+    // var reports = []
     var rows = ""
     var d = new Date(Date.now()).toLocaleString().split(",")[0];
     var subtest = {
