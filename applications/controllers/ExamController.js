@@ -1142,7 +1142,7 @@ exports.reportDetail = async (req,res) => {
             <th rowspan="3" style="text-align:center">TGL PEMERIKSAAN</th>
             <th rowspan="3" style="text-align:center">NO. HP/WA</th>
             <th rowspan="3" style="text-align:center">JURUSAN SEKARANG</th>
-            <th colspan="2" style="text-align:center">NILAI TERTINGGI</th>
+            <th rowspan="2" colspan="3" style="text-align:center">NILAI TERTINGGI</th>
             <th rowspan="3" colspan="3" style="text-align:center">CITA-CITA</th>
             <th rowspan="3" colspan="3" style="text-align:center">PILIHAN JURUSAN</th>
             <th colspan="7" rowspan="2" style="text-align:center">HOLLAND</th>
