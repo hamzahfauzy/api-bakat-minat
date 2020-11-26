@@ -925,7 +925,7 @@ exports.reportDetail = async (req,res) => {
         delete user.metas.school
         // delete user.sequences
         
-        rows += "<td>\'"+user.username+"</td>"
+        rows += "<td>"+user.username+"</td>"
         rows += "<td>"+user.name+"</td>"
         rows += "<td>"+school.name+"</td>"
         rows += "<td>"+user.metas.tempat_lahir+', '+user.metas.tanggal_lahir+"</td>"
