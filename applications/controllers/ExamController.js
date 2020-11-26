@@ -915,10 +915,10 @@ exports.reportDetail = async (req,res) => {
     for(var i=0;i<users.length;i++)
     {
 
-        var n = i+1;
-        rows += "<tr><td>"+n+"</td>"
         var user = await User.findById(users[i]._id)
         if(!user) continue
+        var n = i+1;
+        rows += "<tr><td>"+n+"</td>"
         user = JSON.stringify(user)
         user = JSON.parse(user)
         // delete user.metas.sequences
