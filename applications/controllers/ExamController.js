@@ -977,7 +977,7 @@ exports.reportDetail = async (req,res) => {
         else
         {
             rows += "<td>"+user.metas.hp+"</td>"
-            rows += "<td>"+user.metas.academyc_sma.jurusan+"</td>"
+            rows += "<td>"+(typeof user.metas.academyc_sma === 'undefined'?'':user.metas.academyc_sma.jurusan)+"</td>"
             rows += "<td>"+user.metas.nilai_tertinggi_x.mata_pelajaran+"</td>"
             rows += "<td>"+user.metas.nilai_tertinggi_x.nilai+"</td>"
             rows += "<td>"+user.metas.nilai_tertinggi_xi.mata_pelajaran+"</td>"
