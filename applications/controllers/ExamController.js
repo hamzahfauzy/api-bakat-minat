@@ -930,7 +930,25 @@ exports.reportDetail = async (req,res) => {
         rows += "<td>"+user.metas.jenis_kelamin+"</td>"
         rows += "<td>"+d+"</td>"
         rows += "<td>"+user.metas.hp+"</td>"
-        if(user.hasOwnProperty('sequences'))
+
+        var sequences = user.metas.sequences
+        if(typeof sequences === 'undefined')
+        {
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+            rows += "<td></td>"
+        }
+        else
         {
             rows += "<td>"+user.metas.academyc_sma.jurusan+"</td>"
             rows += "<td>"+user.metas.nilai_tertinggi_x.mata_pelajaran+"</td>"
@@ -946,23 +964,7 @@ exports.reportDetail = async (req,res) => {
             rows += "<td>"+user.metas.jurusan[1].value+"</td>"
             rows += "<td>"+user.metas.jurusan[2].value+"</td>"
         }
-        else
-        {
-            rows += "<td></td>"
-            rows += "<td></td>"
-            rows += "<td></td>"
-            rows += "<td></td>"
-            rows += "<td></td>"
-            rows += "<td></td>"
-            rows += "<td></td>"
-            rows += "<td></td>"
-            rows += "<td></td>"
-            rows += "<td></td>"
-            rows += "<td></td>"
-            rows += "<td></td>"
-            rows += "<td></td>"
-        }
-        var sequences = user.metas.sequences
+
         if(typeof sequences === 'undefined'){
             rows += "<td></td>"
             rows += "<td></td>"
