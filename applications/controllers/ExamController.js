@@ -902,29 +902,29 @@ exports.reportDetail = async (req,res) => {
         user = JSON.stringify(user)
         user = JSON.parse(user)
         // delete user.metas.sequences
-        delete user.metas.school.students
+        delete user.metas.school
         // delete user.sequences
         var d = new Date(Date.now()).toLocaleString().split(",")[0];
         rows += "<td>"+user.name+"</td>"
         rows += "<td>\'"+user.username+"</td>"
-        rows += "<td>\'"+user.metas.school.name+"</td>"
-        rows += "<td>\'"+user.metas.tempat_tanggal_lahir+"</td>"
-        rows += "<td>\'"+user.metas.jenis_kelamin+"</td>"
-        rows += "<td>\'"+d+"</td>"
-        rows += "<td>\'"+user.metas.hp+"</td>"
-        rows += "<td>\'"+user.metas.academyc_sma.jurusan+"</td>"
-        rows += "<td>\'"+user.metas.nilai_tertinggi_x.mata_pelajaran+"</td>"
-        rows += "<td>\'"+user.metas.nilai_tertinggi_x.nilai+"</td>"
-        rows += "<td>\'"+user.metas.nilai_tertinggi_xi.mata_pelajaran+"</td>"
-        rows += "<td>\'"+user.metas.nilai_tertinggi_xi.nilai+"</td>"
-        rows += "<td>\'"+user.metas.nilai_tertinggi_xii.mata_pelajaran+"</td>"
-        rows += "<td>\'"+user.metas.nilai_tertinggi_xii.nilai+"</td>"
-        rows += "<td>\'"+user.metas.cita_cita[0].value+"</td>"
-        rows += "<td>\'"+user.metas.cita_cita[1].value+"</td>"
-        rows += "<td>\'"+user.metas.cita_cita[2].value+"</td>"
-        rows += "<td>\'"+user.metas.jurusan[0].value+"</td>"
-        rows += "<td>\'"+user.metas.jurusan[1].value+"</td>"
-        rows += "<td>\'"+user.metas.jurusan[2].value+"</td>"
+        rows += "<td></td>"
+        rows += "<td>"+user.metas.tempat_tanggal_lahir+"</td>"
+        rows += "<td>"+user.metas.jenis_kelamin+"</td>"
+        rows += "<td>"+d+"</td>"
+        rows += "<td>"+user.metas.hp+"</td>"
+        rows += "<td>"+user.metas.academyc_sma.jurusan+"</td>"
+        rows += "<td>"+user.metas.nilai_tertinggi_x.mata_pelajaran+"</td>"
+        rows += "<td>"+user.metas.nilai_tertinggi_x.nilai+"</td>"
+        rows += "<td>"+user.metas.nilai_tertinggi_xi.mata_pelajaran+"</td>"
+        rows += "<td>"+user.metas.nilai_tertinggi_xi.nilai+"</td>"
+        rows += "<td>"+user.metas.nilai_tertinggi_xii.mata_pelajaran+"</td>"
+        rows += "<td>"+user.metas.nilai_tertinggi_xii.nilai+"</td>"
+        rows += "<td>"+user.metas.cita_cita[0].value+"</td>"
+        rows += "<td>"+user.metas.cita_cita[1].value+"</td>"
+        rows += "<td>"+user.metas.cita_cita[2].value+"</td>"
+        rows += "<td>"+user.metas.jurusan[0].value+"</td>"
+        rows += "<td>"+user.metas.jurusan[1].value+"</td>"
+        rows += "<td>"+user.metas.jurusan[2].value+"</td>"
         var sequences = user.metas.sequences
         if(typeof sequences === 'undefined'){
             rows += "<td></td>"
