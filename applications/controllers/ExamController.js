@@ -891,8 +891,8 @@ exports.reportDetail = async (req,res) => {
     // var reports = []
     var rows = ""
     var d = new Date(Date.now()).toLocaleString().split(",")[0];
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
+    const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni",
+    "Juli", "Agustus", "September", "Oktober", "November", "Desember"
     ];
     for(var i=0;i<users.length;i++)
     {
