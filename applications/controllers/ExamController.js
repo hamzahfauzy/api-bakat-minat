@@ -1024,7 +1024,7 @@ exports.reportDetail = async (req,res) => {
             if(quis%2 != 0) continue;
             var q = quis-16
             var sequence = sequences[j].contents
-            var nilai = 0
+            var nilai = 0, nilai_tpo = 0
             for(var k = 0; k < sequence.length; k++)
             {
                 var content = sequence[k]
@@ -1032,9 +1032,13 @@ exports.reportDetail = async (req,res) => {
                 if(typeof content.selected === 'undefined') continue
                 var selected = content.selected
                 var post = await Post.findById(selected)
-                if(quis <= 16 && post) subtest_value[""+subtest[""+quis]]+=parseInt(post.type_as)
                 if(quis <= 16 && post) total_tpo +=parseInt(post.type_as)
                 else if(quis >= 17 && post) nilai+= parseInt(post.type_as)
+            }
+
+            if(quis <= 16 && post){
+                total_tpo += nilai_tpo
+                subtest_value[""+subtest[""+quis]] += nilai_tpo
             }
 
             if(subtest_R.includes(q))
