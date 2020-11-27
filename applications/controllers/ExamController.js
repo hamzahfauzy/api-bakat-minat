@@ -891,29 +891,30 @@ exports.reportDetail = async (req,res) => {
     // var reports = []
     var rows = ""
     var d = new Date(Date.now()).toLocaleString().split(",")[0];
-    var subtest = {
-        '2':1,
-        '4':2,
-        '6':3,
-        '8':4,
-        '10':5,
-        '12':6,
-        '14':7,
-        '16':8,
-    }
-
-    var subtest_value = {
-        '1':0,
-        '2':0,
-        '3':0,
-        '4':0,
-        '5':0,
-        '6':0,
-        '7':0,
-        '8':0,
-    }
     for(var i=0;i<users.length;i++)
     {
+
+        var subtest = {
+            '2':1,
+            '4':2,
+            '6':3,
+            '8':4,
+            '10':5,
+            '12':6,
+            '14':7,
+            '16':8,
+        }
+    
+        var subtest_value = {
+            '1':0,
+            '2':0,
+            '3':0,
+            '4':0,
+            '5':0,
+            '6':0,
+            '7':0,
+            '8':0,
+        }
 
         var user = await User.findById(users[i]._id)
         if(!user) continue
@@ -1207,13 +1208,11 @@ exports.reportDetail = async (req,res) => {
         </tr>
         ${rows}
     </table></div>
-    <!--
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <script src="/api/uploads/tableToExcel.js" type="text/javascript"></script>
     <script type="text/javascript">
         tableToExcel('report', '${school.name}')
     </script> 
-    -->
     `
 
     res.type("text/html");
