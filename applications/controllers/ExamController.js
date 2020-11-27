@@ -891,6 +891,9 @@ exports.reportDetail = async (req,res) => {
     // var reports = []
     var rows = ""
     var d = new Date(Date.now()).toLocaleString().split(",")[0];
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+    ];
     for(var i=0;i<users.length;i++)
     {
         var subtest = {
@@ -924,11 +927,14 @@ exports.reportDetail = async (req,res) => {
         // delete user.metas.sequences
         delete user.metas.school
         // delete user.sequences
+
+        var tanggal_lahir = new Date(user.metas.tanggal_lahir)
+        tanggal_lahir = tanggal_lahir.getDate()+' '+monthNames[tanggal_lahir.getMonth()]+' '+tanggal_lahir.getFullYear()
         
         rows += "<td>"+user.username+"</td>"
         rows += "<td>"+user.name+"</td>"
         rows += "<td>"+school.name+"</td>"
-        rows += "<td>"+user.metas.tempat_lahir+', '+user.metas.tanggal_lahir+"</td>"
+        rows += "<td>"+user.metas.tempat_lahir+', '+tanggal_lahir+"</td>"
         rows += "<td>"+user.metas.jenis_kelamin+"</td>"
         rows += "<td>"+d+"</td>"
         
