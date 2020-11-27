@@ -1074,7 +1074,7 @@ exports.reportDetail = async (req,res) => {
         // hasil_arr.push({"name":"SOCIAL","nilai":S})
         hasil_arr.push({"name":"S","nilai":S})
         // hasil_arr.push({"name":"ENTERPRENUER","nilai":E})
-        hasil_arr.push({"name":"S","nilai":E})
+        hasil_arr.push({"name":"E","nilai":E})
         // hasil_arr.push({"name":"CONVENTIONAL","nilai":C})
         hasil_arr.push({"name":"C","nilai":C})
 
