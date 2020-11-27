@@ -1065,19 +1065,25 @@ exports.reportDetail = async (req,res) => {
         delete user.metas.sequences
         // reports.push(user)
 
-        hasil_arr.push({"name":"REALISTIC","nilai":R})
-        hasil_arr.push({"name":"INVESTIGATIVE","nilai":I})
-        hasil_arr.push({"name":"ARTISTIC","nilai":A})
-        hasil_arr.push({"name":"SOCIAL","nilai":S})
-        hasil_arr.push({"name":"ENTERPRENUER","nilai":E})
-        hasil_arr.push({"name":"CONVENTIONAL","nilai":C})
+        // hasil_arr.push({"name":"REALISTIC","nilai":R})
+        hasil_arr.push({"name":"R","nilai":R})
+        // hasil_arr.push({"name":"INVESTIGATIVE","nilai":I})
+        hasil_arr.push({"name":"I","nilai":I})
+        // hasil_arr.push({"name":"ARTISTIC","nilai":A})
+        hasil_arr.push({"name":"A","nilai":A})
+        // hasil_arr.push({"name":"SOCIAL","nilai":S})
+        hasil_arr.push({"name":"S","nilai":S})
+        // hasil_arr.push({"name":"ENTERPRENUER","nilai":E})
+        hasil_arr.push({"name":"S","nilai":E})
+        // hasil_arr.push({"name":"CONVENTIONAL","nilai":C})
+        hasil_arr.push({"name":"C","nilai":C})
 
         hasil_arr = hasil_arr.sort((a,b) => (a.nilai < b.nilai) ? 1 : ((b.nilai < a.nilai) ? -1 : 0))
         hasil_arr = hasil_arr.slice(0,3)
         var hasil = ""
         hasil_arr.forEach((val,idx) => {
             hasil += val.name
-            if(idx < 2) hasil += " - "
+            if(idx < 6) hasil += " - "
         })
 
         var daya_tangkap = subtest_value[1]
