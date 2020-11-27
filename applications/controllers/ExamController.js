@@ -1032,7 +1032,7 @@ exports.reportDetail = async (req,res) => {
                 if(typeof content.selected === 'undefined') continue
                 var selected = content.selected
                 var post = await Post.findById(selected)
-                if(quis <= 16 && post) subtest_value[""+subtest[quis]]+=parseInt(post.type_as)
+                if(quis <= 16 && post) subtest_value[""+subtest[""+quis]]+=parseInt(post.type_as)
                 if(quis <= 16 && post) total_tpo +=parseInt(post.type_as)
                 else if(quis >= 17 && post) nilai+= parseInt(post.type_as)
             }
@@ -1203,11 +1203,13 @@ exports.reportDetail = async (req,res) => {
         </tr>
         ${rows}
     </table></div>
+    <!--
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <script src="/api/uploads/tableToExcel.js" type="text/javascript"></script>
     <script type="text/javascript">
         tableToExcel('report', '${school.name}')
     </script> 
+    -->
     `
 
     res.type("text/html");
