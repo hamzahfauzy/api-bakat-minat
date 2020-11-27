@@ -1083,7 +1083,7 @@ exports.reportDetail = async (req,res) => {
         var hasil = ""
         hasil_arr.forEach((val,idx) => {
             hasil += val.name
-            if(idx < 6) hasil += " - "
+            if(idx < 5) hasil += " - "
         })
 
         var daya_tangkap = subtest_value[1]
