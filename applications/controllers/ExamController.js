@@ -893,7 +893,6 @@ exports.reportDetail = async (req,res) => {
     var d = new Date(Date.now()).toLocaleString().split(",")[0];
     for(var i=0;i<users.length;i++)
     {
-
         var subtest = {
             '2':1,
             '4':2,
@@ -1033,7 +1032,7 @@ exports.reportDetail = async (req,res) => {
                 if(typeof content.selected === 'undefined') continue
                 var selected = content.selected
                 var post = await Post.findById(selected)
-                if(quis <= 16 && post) total_tpo +=parseInt(post.type_as)
+                if(quis <= 16 && post) nilai_tpo +=parseInt(post.type_as)
                 else if(quis >= 17 && post) nilai+= parseInt(post.type_as)
             }
 
