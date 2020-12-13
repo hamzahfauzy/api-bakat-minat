@@ -46,14 +46,14 @@ else
     console.log("Db connected successfully")
 
 // Setup server port
-var port = process.env.PORT || 8000;
+var port = process.env.PORT || 8080;
 
 // Send message for default URL
 app.get('/', (req, res) => res.send('Hello World with Express'));
 
 // Launch app to listen to specified port
 app.listen(port, '0.0.0.0', function () {
-     console.log("Running Bakat Minat API on port " + port);
+     console.log("Running TPO API on port " + port);
 });
 
 var d = new Date()
