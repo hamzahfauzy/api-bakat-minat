@@ -1235,7 +1235,7 @@ exports.download = async function(req, res)
                     </table>
                     </div>
                     <br>
-                    <div style="text-align:right;font-size:12px!important;margin-right:100px;">Medan, ${today}</div>
+                    <div style="text-align:right;font-size:10px!important;margin-right:25px;">Medan, ${today}</div>
                     <img src="http://tmc.minat-bakat.id:8000/api/uploads/bottom.png" width="100%" />
                     <img src="http://tmc.minat-bakat.id:8000/api/uploads/lampiran.jpg" width="100%" />
                 </div>`
