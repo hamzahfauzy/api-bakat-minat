@@ -1131,6 +1131,20 @@ exports.reportDetail = async (req,res) => {
 
 exports.download = async function(req, res)
 {
+    var today = new Date();  
+    var dd = today.getDate(); 
+    // var mm = today.getMonth() + 1; 
+    var months = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"]
+    var mm = months[today.getMonth()]
+
+    var yyyy = today.getFullYear(); 
+    if (dd < 10) { 
+        dd = '0' + dd; 
+    } 
+    // if (mm < 10) { 
+    //     mm = '0' + mm; 
+    // } 
+    var today = dd + ' ' + mm + ' ' + yyyy; 
     var user = await User.findById(req.params.user_id)
 
     var html = `<div style="margin:auto;">
@@ -1165,7 +1179,7 @@ exports.download = async function(req, res)
                         <tr>
                             <td width="20%">Tanggal Pemeriksaan</td>
                             <td>:</td>
-                            <td>10 Agustus 2020</td>
+                            <td>8 Juli 2020</td>
                         </tr>
                     </table>
                     <br>
@@ -1221,6 +1235,7 @@ exports.download = async function(req, res)
                     </table>
                     </div>
                     <br>
+                    <div style="width:100%;text-align:right;">Medan, ${today}</div>
                     <img src="http://tmc.minat-bakat.id:8000/api/uploads/bottom.png" width="100%" />
                     <img src="http://tmc.minat-bakat.id:8000/api/uploads/lampiran.jpg" width="100%" />
                 </div>`
