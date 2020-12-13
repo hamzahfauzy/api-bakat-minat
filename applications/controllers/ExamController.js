@@ -1208,9 +1208,9 @@ exports.download = async function(req, res)
                             <td>4.</td>
                             <td>BAKAT DAN MINAT</td>
                             <td style="text-align:center">:</td>
-                            <td style="text-align:center"><b>${user.metas.nilai.hasil == null || user.metas.nilai.hasil == 'Tidak diketahui' ? 'Tidak diketahui' : user.metas.nilai.hasil.split(" - ")[0]}</b></td>
-                            <td style="text-align:center"><b>${user.metas.nilai.hasil == null || user.metas.nilai.hasil == 'Tidak diketahui' ? 'Tidak diketahui' : user.metas.nilai.hasil.split(" - ")[1]}</b></td>
-                            <td style="text-align:center"><b>${user.metas.nilai.hasil == null || user.metas.nilai.hasil == 'Tidak diketahui' ? 'Tidak diketahui' : user.metas.nilai.hasil.split(" - ")[2]}</b></td>
+                            <td style="text-align:center"><b>${user.metas.nilai.hasil != undefined || user.metas.nilai.hasil == 'Tidak diketahui' ? 'Tidak diketahui' : user.metas.nilai.hasil.split(" - ")[0]}</b></td>
+                            <td style="text-align:center"><b>${user.metas.nilai.hasil != undefined || user.metas.nilai.hasil == 'Tidak diketahui' ? 'Tidak diketahui' : user.metas.nilai.hasil.split(" - ")[1]}</b></td>
+                            <td style="text-align:center"><b>${user.metas.nilai.hasil != undefined || user.metas.nilai.hasil == 'Tidak diketahui' ? 'Tidak diketahui' : user.metas.nilai.hasil.split(" - ")[2]}</b></td>
                         </tr>
                         <tr style="font-weight:bold">
                             <td>5.</td>
