@@ -1235,14 +1235,14 @@ exports.download = async function(req, res)
                     </table>
                     </div>
                     <br>
-                    <div style="width:100%;text-align:right;font-size:12px!important;margin-right:100px;">Medan, ${today}</div>
+                    <div style="text-align:right;font-size:12px!important;margin-right:200px;">Medan, ${today}</div>
                     <img src="http://tmc.minat-bakat.id:8000/api/uploads/bottom.png" width="100%" />
                     <img src="http://tmc.minat-bakat.id:8000/api/uploads/lampiran.jpg" width="100%" />
                 </div>`
 
-    res.type("text/html");
-    res.send(html)
-    return
+    // res.type("text/html");
+    // res.send(html)
+    // return
 
     var options = { 
         format: 'A4',
