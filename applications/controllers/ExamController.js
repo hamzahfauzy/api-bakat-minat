@@ -1147,10 +1147,17 @@ exports.download = async function(req, res)
     var today = dd + ' ' + mm + ' ' + yyyy; 
     var user = await User.findById(req.params.user_id)
 
-    var html = `<div style="margin:auto;">
+    var html = `<style>table, td, th {
+        border: 1px solid black;
+      }
+      
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }</style><div style="margin:auto;">
                     <img src="http://tmc.minat-bakat.id:8000/api/uploads/top.jpeg" width="100%" />
                     <div style="width:90%;margin:auto;margin-top:30px;">
-                    <table width="100%" border="1" cellpadding="5" cellspacing="0" style="font-size:8px!important">
+                    <table width="100%" cellpadding="5" cellspacing="0" style="font-size:8px!important">
                         <tr>
                             <td rowspan="5" width="30%" style="line-height:1.5">
                                 <center>
