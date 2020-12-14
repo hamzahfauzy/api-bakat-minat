@@ -1148,7 +1148,7 @@ exports.download = async function(req, res)
     var user = await User.findById(req.params.user_id)
 
     var html = `<style>table, td, th {
-        border: 0.5px solid black;
+        border: 1px solid black;
       }
       
       table {
