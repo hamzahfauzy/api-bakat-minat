@@ -1155,7 +1155,7 @@ exports.download = async function(req, res)
         width: 100%;
         border-collapse: collapse;
       }</style><div style="margin:auto;">
-                    <img src="http://tmc.minat-bakat.id:8000/api/uploads/top.jpeg" width="100%" />
+                    <img src="http://tmc.minat-bakat.id:8000/api/uploads/top.png" width="100%" />
                     <div style="width:90%;margin:auto;margin-top:30px;">
                     <table width="100%" cellpadding="5" cellspacing="0" style="font-size:8px!important">
                         <tr>
@@ -1244,7 +1244,7 @@ exports.download = async function(req, res)
                     <br>
                     <div style="text-align:right;font-size:9px!important;margin-right:80px;">Medan, ${today}</div>
                     <img src="http://tmc.minat-bakat.id:8000/api/uploads/bottom.png" width="100%" />
-                    <img src="http://tmc.minat-bakat.id:8000/api/uploads/lampiran.jpg" width="100%" />
+                    <img src="http://tmc.minat-bakat.id:8000/api/uploads/lampiran.png" width="100%" />
                 </div>`
 
     // res.type("text/html");
